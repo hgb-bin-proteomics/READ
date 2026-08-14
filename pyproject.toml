@@ -1,8 +1,11 @@
 [project]
-name = "TMT"
+name = "IMP-READ"
 version = "2025.09.18"
 description = "TMTpro-18plex quantification for [single cell] DIA and DDA searches."
 readme = "README.md"
+authors = [
+    { name = "Micha Johannes Birklbauer", email = "19354640+michabirklbauer@users.noreply.github.com" }
+]
 requires-python = ">=3.12"
 dependencies = [
     "gooey>=1.0.8.1",
@@ -17,3 +20,17 @@ dependencies = [
     "ruff>=0.14.2",
     "tqdm>=4.67.1",
 ]
+
+[project.scripts]
+tmt_chimerys = "imp_read:tmt_chimerys"
+tmt_chimerys_dda = "imp_read:tmt_chimerys_dda"
+tmt_chimerys_dda_gui = "imp_read:tmt_chimerys_dda_gui"
+tmt_chimerys_gui = "imp_read:tmt_chimerys_gui"
+tmt_diann = "imp_read:tmt_diann"
+tmt_diann_gui = "imp_read:tmt_diann_gui"
+tmt_spectronaut = "imp_read:tmt_spectronaut"
+tmt_spectronaut_gui = "imp_read:tmt_spectronaut_gui"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
