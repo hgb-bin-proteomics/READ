@@ -12,12 +12,8 @@ dependencies = [
     "numpy>=2.3.4",
     "pandas<3",
     "pyarrow>=22.0.0",
-    "pyinstaller>=6.20.0",
     "pyopenms>=3.4.0",
-    "pyright>=1.1.407",
     "pyteomics[xml]>=4.7.5",
-    "pytest>=8.4.2",
-    "ruff>=0.14.2",
     "tqdm>=4.67.1",
 ]
 
