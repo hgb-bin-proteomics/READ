@@ -8,8 +8,8 @@
 import pandas as pd
 
 try:
-    from gooey import Gooey
-    from gooey import GooeyParser
+    from gooey import Gooey  # pyright: ignore[reportMissingImports]
+    from gooey import GooeyParser  # pyright: ignore[reportMissingImports]
 except ImportError as _e:
     Gooey = None
     GooeyParser = None
@@ -47,7 +47,7 @@ def main(argv=None) -> pd.DataFrame:
         ],
     )
     def _main(argv=None) -> pd.DataFrame:
-        parser = GooeyParser(
+        parser = GooeyParser(  # pyright: ignore[reportOptionalCall]
             prog="tmt_chimerys_dda.py",
             description="Calculates co-isolation purity for Chimerys DDA TMT PSMs and optionally quantifies them.",
             epilog="(c) Research Institute of Molecular Pathology, 2025",
