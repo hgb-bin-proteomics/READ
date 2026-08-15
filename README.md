@@ -15,7 +15,7 @@ TMTpro-18plex quantification for \[single cell\] DIA and DDA searches with
 ## Usage
 
 - On Microsoft Windows the applications can be run as standalone executables or as python scripts.
-- Other operating systems are limited to the python scripts, please refer to [CLI.md](CLI.md).
+- Other operating systems are limited to the python scripts, please refer to [CLI.md](docs/CLI.md).
 
 ### Graphical User Interface
 
@@ -32,12 +32,12 @@ We provide compiled binaries for Microsoft Windows that offer a graphical user i
 
 ### Commandline Interface
 
-Please refer to [CLI.md](CLI.md).
+Please refer to [CLI.md](docs/CLI.md).
 
 ### Running the Scripts for Multiple Files
 
 If you want to run the scripts for multiple input files sequentially, please
-refer to [MULTI.md](MULTI.md).
+refer to [MULTI.md](docs/MULTI.md).
 
 ### Configuration
 
