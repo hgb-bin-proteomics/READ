@@ -148,6 +148,7 @@ def main(argv=None) -> pd.DataFrame:
         )
         print("Script finished successfully!")
         return df
+
     return _main(argv)
 
 

@@ -31,7 +31,7 @@ from .tmt_spectronaut import __annotate_spectronaut_result
 def main(argv=None) -> pd.DataFrame:
     if Gooey is None:
         raise ImportError("Gooey is needed but not installed!")
-    
+
     @Gooey(
         encoding="utf-8",
         program_name=f"TMT Spectronaut {__version}",
@@ -149,6 +149,7 @@ def main(argv=None) -> pd.DataFrame:
         )
         print("Script finished successfully!")
         return df
+
     return _main(argv)
 
 
