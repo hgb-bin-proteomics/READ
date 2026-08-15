@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
 #
 # /// script
-# requires-python = ">=3.12"
+# requires-python = ">=3.12,<3.14"
 # dependencies = [
-#   "pandas",
-#   "numpy",
-#   "tqdm",
-#   "pyteomics[XML]",
-#   "pyopenms",
+#   "imp-read",
 # ]
 # ///
 
@@ -18,15 +14,15 @@
 
 import os
 import glob
-from tmt_chimerys import __get_resolution_gui_map
-from tmt_chimerys import __read_settings
-from tmt_chimerys import __convert
-from tmt_chimerys import __read_spectra_by_scannumber
-from tmt_chimerys import __get_consensusXML_df
-from tmt_chimerys import __get_consensusXML_map
-from tmt_chimerys import __annotate_chimerys_result
-from tmt_chimerys import __annotate_chimerys_protein_table
-from tmt_chimerys import __annotate_result_conditions
+from imp_read.tmt_chimerys import __get_resolution_gui_map
+from imp_read.tmt_chimerys import __read_settings
+from imp_read.tmt_chimerys import __convert
+from imp_read.tmt_chimerys import __read_spectra_by_scannumber
+from imp_read.tmt_chimerys import __get_consensusXML_df
+from imp_read.tmt_chimerys import __get_consensusXML_map
+from imp_read.tmt_chimerys import __annotate_chimerys_result
+from imp_read.tmt_chimerys import __annotate_chimerys_protein_table
+from imp_read.tmt_chimerys import __annotate_result_conditions
 
 CONFIG_FILE = "config.toml"
 RESOLUTION_FILE = "resolution.csv"
