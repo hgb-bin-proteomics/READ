@@ -7,9 +7,12 @@
 
 import pandas as pd
 
-
-from gooey import Gooey
-from gooey import GooeyParser
+try:
+    from gooey import Gooey
+    from gooey import GooeyParser
+except ImportError as _e:
+    Gooey = None
+    GooeyParser = None
 
 from .tmt_chimerys import __get_bool_from_value
 from .tmt_chimerys import __read_settings
@@ -25,122 +28,127 @@ from .tmt_diann import __annotate_diann_pgs
 from .tmt_diann import __annotate_diann_result
 
 
-@Gooey(
-    encoding="utf-8",
-    program_name=f"TMT DIA-NN {__version}",
-    menu=[
-        {
-            "name": "Help",
-            "items": [
-                {
-                    "type": "Link",
-                    "menuTitle": "Project Page",
-                    "url": "https://github.com/hgb-bin-proteomics/TMT/",
-                }
-            ],
-        }
-    ],
-)
 def main(argv=None) -> pd.DataFrame:
-    parser = GooeyParser(
-        prog="tmt_diann.py",
-        description="Calculates co-isolation purity for DIA-NN DIA TMT peptide matches and quantifies them.",
-        epilog="(c) Research Institute of Molecular Pathology, 2025",
+    if Gooey is None:
+        raise ImportError("Gooey is needed but not installed!")
+
+    @Gooey(
+        encoding="utf-8",
+        program_name=f"TMT DIA-NN {__version}",
+        menu=[
+            {
+                "name": "Help",
+                "items": [
+                    {
+                        "type": "Link",
+                        "menuTitle": "Project Page",
+                        "url": "https://github.com/hgb-bin-proteomics/TMT/",
+                    }
+                ],
+            }
+        ],
     )
-    req = parser.add_argument_group("Required", "Required Arguments.")
-    req.add_argument(
-        "-i",
-        "--diann",
-        dest="diann",
-        required=True,
-        help="Path/name of the DIA-NN result file.",
-        type=str,
-        widget="FileChooser",
-    )
-    req.add_argument(
-        "-s",
-        "--spectra",
-        dest="spectra",
-        required=True,
-        help="Path/name of the mass spectra file in mzML format.",
-        type=str,
-        widget="FileChooser",
-    )
-    req.add_argument(
-        "-c",
-        "--config",
-        dest="config",
-        required=True,
-        help="Path/name of the config file.",
-        type=str,
-        widget="FileChooser",
-    )
-    opt = parser.add_argument_group("Optional", "Optional Arguments.")
-    opt.add_argument(
-        "-r",
-        "--resolution",
-        dest="resolution",
-        required=False,
-        default=None,
-        help="Path/name of the resolution.csv file from the Resolution GUI file.",
-        type=str,
-        widget="FileChooser",
-    )
-    opt.add_argument(
-        "-w",
-        "--window",
-        dest="window_file",
-        default=None,
-        help="Window file, overrides config file!",
-        type=str,
-        widget="FileChooser",
-    )
-    opt.add_argument(
-        "-v",
-        "--verbose",
-        dest="verbose",
-        default=2,
-        help="Verbose level.",
-        type=int,
-        widget="IntegerField",
-        gooey_options={"initial_value": 1, "min": 0, "max": 2, "increment": 1},
-    )
-    args = parser.parse_args(argv)
-    settings = __read_settings(args.config)
-    print("Read settings:")
-    print(settings)
-    if args.window_file is not None:
-        print(f"Using windows from given windows file: {args.window_file}")
-    args_spectra = __convert(args.spectra)
-    spectra = __read_spectra(args_spectra)
-    quantification_method = int(settings["quantification_method"])
-    consensusXML_map = None
-    if quantification_method != 1 and quantification_method != 3:
-        consensusXML_df = __get_consensusXML_df(args_spectra)
-        consensusXML_map = __get_consensusXML_map(consensusXML_df)
-    resolution_gui_map = None
-    if args.resolution is not None:
-        resolution_gui_map = __get_resolution_gui_map(args.resolution)
-    df = __annotate_diann_result(
-        diann_filename=args.diann,
-        spectrum_filename=args_spectra,
-        spectra=spectra,
-        settings=settings,
-        consensusXML_map=consensusXML_map,
-        resolution_gui_map=resolution_gui_map,
-        window_file=args.window_file,
-        verbose=int(args.verbose),
-    )
-    df = __annotate_result_conditions(df, settings["conditions"])
-    df = __annotate_diann_pgs(df, settings)
-    if not __get_bool_from_value(settings["keep_pg"]):
-        df = __remove_ambiguous_pg(df)
-    df.to_parquet(
-        args.diann.split(".parquet")[0] + "_purity_tmt_quant.parquet",
-        index=False,
-    )
-    print("Script finished successfully!")
-    return df
+    def _main(argv=None) -> pd.DataFrame:
+        parser = GooeyParser(
+            prog="tmt_diann.py",
+            description="Calculates co-isolation purity for DIA-NN DIA TMT peptide matches and quantifies them.",
+            epilog="(c) Research Institute of Molecular Pathology, 2025",
+        )
+        req = parser.add_argument_group("Required", "Required Arguments.")
+        req.add_argument(
+            "-i",
+            "--diann",
+            dest="diann",
+            required=True,
+            help="Path/name of the DIA-NN result file.",
+            type=str,
+            widget="FileChooser",
+        )
+        req.add_argument(
+            "-s",
+            "--spectra",
+            dest="spectra",
+            required=True,
+            help="Path/name of the mass spectra file in mzML format.",
+            type=str,
+            widget="FileChooser",
+        )
+        req.add_argument(
+            "-c",
+            "--config",
+            dest="config",
+            required=True,
+            help="Path/name of the config file.",
+            type=str,
+            widget="FileChooser",
+        )
+        opt = parser.add_argument_group("Optional", "Optional Arguments.")
+        opt.add_argument(
+            "-r",
+            "--resolution",
+            dest="resolution",
+            required=False,
+            default=None,
+            help="Path/name of the resolution.csv file from the Resolution GUI file.",
+            type=str,
+            widget="FileChooser",
+        )
+        opt.add_argument(
+            "-w",
+            "--window",
+            dest="window_file",
+            default=None,
+            help="Window file, overrides config file!",
+            type=str,
+            widget="FileChooser",
+        )
+        opt.add_argument(
+            "-v",
+            "--verbose",
+            dest="verbose",
+            default=2,
+            help="Verbose level.",
+            type=int,
+            widget="IntegerField",
+            gooey_options={"initial_value": 1, "min": 0, "max": 2, "increment": 1},
+        )
+        args = parser.parse_args(argv)
+        settings = __read_settings(args.config)
+        print("Read settings:")
+        print(settings)
+        if args.window_file is not None:
+            print(f"Using windows from given windows file: {args.window_file}")
+        args_spectra = __convert(args.spectra)
+        spectra = __read_spectra(args_spectra)
+        quantification_method = int(settings["quantification_method"])
+        consensusXML_map = None
+        if quantification_method != 1 and quantification_method != 3:
+            consensusXML_df = __get_consensusXML_df(args_spectra)
+            consensusXML_map = __get_consensusXML_map(consensusXML_df)
+        resolution_gui_map = None
+        if args.resolution is not None:
+            resolution_gui_map = __get_resolution_gui_map(args.resolution)
+        df = __annotate_diann_result(
+            diann_filename=args.diann,
+            spectrum_filename=args_spectra,
+            spectra=spectra,
+            settings=settings,
+            consensusXML_map=consensusXML_map,
+            resolution_gui_map=resolution_gui_map,
+            window_file=args.window_file,
+            verbose=int(args.verbose),
+        )
+        df = __annotate_result_conditions(df, settings["conditions"])
+        df = __annotate_diann_pgs(df, settings)
+        if not __get_bool_from_value(settings["keep_pg"]):
+            df = __remove_ambiguous_pg(df)
+        df.to_parquet(
+            args.diann.split(".parquet")[0] + "_purity_tmt_quant.parquet",
+            index=False,
+        )
+        print("Script finished successfully!")
+        return df
+    return _main(argv)
 
 
 if __name__ == "__main__":

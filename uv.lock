@@ -119,7 +119,6 @@ name = "imp-read"
 version = "2025.9.18"
 source = { editable = "." }
 dependencies = [
-    { name = "gooey" },
     { name = "numpy" },
     { name = "pandas" },
     { name = "pyarrow" },
@@ -128,9 +127,14 @@ dependencies = [
     { name = "tqdm" },
 ]
 
+[package.optional-dependencies]
+gui = [
+    { name = "gooey" },
+]
+
 [package.metadata]
 requires-dist = [
-    { name = "gooey", specifier = ">=1.0.8.1" },
+    { name = "gooey", marker = "extra == 'gui'", specifier = ">=1.0.8.1" },
     { name = "numpy", specifier = ">=2.3.4" },
     { name = "pandas", specifier = "<3" },
     { name = "pyarrow", specifier = ">=22.0.0" },
@@ -138,6 +142,7 @@ requires-dist = [
     { name = "pyteomics", extras = ["xml"], specifier = ">=4.7.5,<5" },
     { name = "tqdm", specifier = ">=4.67.1" },
 ]
+provides-extras = ["gui"]
 
 [[package]]
 name = "kiwisolver"

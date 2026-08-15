@@ -8,13 +8,17 @@ authors = [
 ]
 requires-python = ">=3.12,<3.14"
 dependencies = [
-    "gooey>=1.0.8.1",
     "numpy>=2.3.4",
     "pandas<3",
     "pyarrow>=22.0.0",
     "pyopenms>=3.4.0,<3.5.0",
     "pyteomics[xml]>=4.7.5,<5",
     "tqdm>=4.67.1",
+]
+
+[project.optional-dependencies]
+gui = [
+    "gooey>=1.0.8.1",
 ]
 
 [project.scripts]
