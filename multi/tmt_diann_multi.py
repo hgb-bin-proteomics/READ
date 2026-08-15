@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
 #
 # /// script
-# requires-python = ">=3.12"
+# requires-python = ">=3.12,<3.14"
 # dependencies = [
-#   "pandas",
-#   "numpy",
-#   "pyarrow",
-#   "tqdm",
-#   "pyteomics[XML]",
-#   "pyopenms",
+#   "imp-read",
 # ]
 # ///
 
@@ -19,17 +14,17 @@
 
 import os
 import glob
-from tmt_chimerys import __get_resolution_gui_map
-from tmt_chimerys import __read_settings
-from tmt_chimerys import __convert
-from tmt_spectronaut import __read_spectra
-from tmt_chimerys import __get_consensusXML_df
-from tmt_chimerys import __get_consensusXML_map
-from tmt_diann import __annotate_diann_result
-from tmt_chimerys import __annotate_result_conditions
-from tmt_chimerys import __get_bool_from_value
-from tmt_diann import __annotate_diann_pgs
-from tmt_diann import __remove_ambiguous_pg
+from imp_read.tmt_chimerys import __get_resolution_gui_map
+from imp_read.tmt_chimerys import __read_settings
+from imp_read.tmt_chimerys import __convert
+from imp_read.tmt_spectronaut import __read_spectra
+from imp_read.tmt_chimerys import __get_consensusXML_df
+from imp_read.tmt_chimerys import __get_consensusXML_map
+from imp_read.tmt_diann import __annotate_diann_result
+from imp_read.tmt_chimerys import __annotate_result_conditions
+from imp_read.tmt_chimerys import __get_bool_from_value
+from imp_read.tmt_diann import __annotate_diann_pgs
+from imp_read.tmt_diann import __remove_ambiguous_pg
 
 CONFIG_FILE = "config.toml"
 RESOLUTION_FILE = "resolution.csv"
