@@ -1,12 +1,31 @@
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
 [project]
 name = "IMP-READ"
 version = "2025.09.18"
 description = "TMTpro-18plex quantification for [single cell] DIA and DDA searches."
+keywords = ["mass spectrometry", "proteomics"]
 readme = "README.md"
+license = {file = "LICENSE"}
 authors = [
-    { name = "Micha Johannes Birklbauer", email = "19354640+michabirklbauer@users.noreply.github.com" }
+    { name = "Micha Johannes Birklbauer", email = "micha.birklbauer@fh-hagenberg.at" },
+]
+maintainers = [
+    { name = "Micha Johannes Birklbauer", email = "micha.birklbauer@fh-hagenberg.at" },
 ]
 requires-python = ">=3.12,<3.14"
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Development Status :: 5 - Production/Stable"
+]
 dependencies = [
     "numpy>=2.3.4",
     "pandas<3",
@@ -31,6 +50,8 @@ tmt_diann_gui = "imp_read:tmt_diann_gui"
 tmt_spectronaut = "imp_read:tmt_spectronaut"
 tmt_spectronaut_gui = "imp_read:tmt_spectronaut_gui"
 
-[build-system]
-requires = ["uv_build>=0.12.5,<0.13.0"]
-build-backend = "uv_build"
+[project.urls]
+Homepage = "https://github.com/hgb-bin-proteomics/READ"
+Documentation = "https://github.com/hgb-bin-proteomics/READ"
+Repository = "https://github.com/hgb-bin-proteomics/READ.git"
+Issues = "https://github.com/hgb-bin-proteomics/READ/issues"
