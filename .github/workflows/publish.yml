@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/pyXLMS
+      url: https://pypi.org/p/IMP-READ/
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
 
