@@ -17,20 +17,18 @@ TMTpro-18plex quantification for \[single cell\] DIA and DDA searches with
 ## Usage
 
 - On Microsoft Windows the applications can be run as standalone executables or as python scripts.
-- Other operating systems are limited to the python scripts, please refer to [CLI.md](docs/CLI.md).
+- Other operating systems are limited to the python scripts, please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md).
 
 ### Graphical User Interface
 
-![GUI screenshot](docs/gui.png)
+![GUI screenshot](https://github.com/hgb-bin-proteomics/READ/raw/master/docs/gui.png)
 
 We provide compiled binaries for Microsoft Windows that offer a graphical user interface. Please download the executables from
 [releases](https://github.com/hgb-bin-proteomics/READ/releases).
 
-> [!IMPORTANT]
->
-> Please make sure that the executable and the `tmt18plex_default.ini` file are in the same directory!
-> You might also have to unblock the `tmt18plex_default.ini` file either via its _Properties_ (right-click) or
-> using [PowerShell](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file).
+**Please make sure that the executable and the `tmt18plex_default.ini` file are in the same directory!**
+**You might also have to unblock the `tmt18plex_default.ini` file either via its _Properties_ (right-click) or**
+**using [PowerShell](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file).**
 
 ### Commandline Interface
 
@@ -39,7 +37,7 @@ Please refer to [CLI.md](docs/CLI.md).
 ### Running the Scripts for Multiple Files
 
 If you want to run the scripts for multiple input files sequentially, please
-refer to [MULTI.md](docs/MULTI.md).
+refer to [MULTI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/MULTI.md).
 
 ### Configuration
 
@@ -126,10 +124,8 @@ sn_thresholds = { all = 0.0, cond1 = 10.0, cond2 = 10.0 }
 s_thresholds = { all = 0.0, cond1 = 0.0, cond2 = 0.0 }
 ```
 
-> [!IMPORTANT]
->
-> You might also want to adapt the isotope correction factors for your TMT lot, you can do that in the `tmt18plex_default.ini` file.
-> Please refer to the documentation site of OpenMS [here](https://openms.de/documentation/html/TOPP_IsobaricAnalyzer.html).
+**You might also want to adapt the isotope correction factors for your TMT lot, you can do that in the `tmt18plex_default.ini` file.**
+**Please refer to the documentation site of OpenMS [here](https://openms.de/documentation/html/TOPP_IsobaricAnalyzer.html).**
 
 ## TMT Resolution GUI Tool
 

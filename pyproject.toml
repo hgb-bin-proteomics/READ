@@ -4,10 +4,10 @@ build-backend = "uv_build"
 
 [project]
 name = "IMP-READ"
-version = "2025.09.18"
+version = "2026.08.16"
 description = "TMTpro-18plex quantification for [single cell] DIA and DDA searches."
 keywords = ["mass spectrometry", "proteomics"]
-readme = "README.md"
+readme = "docs/PYPI.md"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [
@@ -21,7 +21,6 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering :: Bio-Informatics",
