@@ -4,10 +4,10 @@ build-backend = "uv_build"
 
 [project]
 name = "IMP-READ"
-version = "2025.09.18"
+version = "2026.08.16"
 description = "TMTpro-18plex quantification for [single cell] DIA and DDA searches."
 keywords = ["mass spectrometry", "proteomics"]
-readme = "README.md"
+readme = "docs/PYPI.md"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [
