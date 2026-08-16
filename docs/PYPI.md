@@ -1,6 +1,7 @@
 # READ
 _\[R\]eporter Ion \[E\]xtractor and \[A\]nnotation \[D\]irector_
 
+**READ:** A tool and python package to orchestrate
 TMTpro-18plex quantification for \[single cell\] DIA and DDA searches with
 [Chimerys](https://www.msaid.de/chimerys),
 [Spectronaut](https://biognosys.com/software/spectronaut/), and
