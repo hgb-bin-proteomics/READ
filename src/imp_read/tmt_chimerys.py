@@ -355,7 +355,7 @@ def __annotate_chimerys_protein_df(
             channels[k].append(v)
         mean_purities.append(float(np.mean(purities)))
         median_purites.append(float(np.median(purities)))
-        nr_psms_filtered.append(protein_nr_psms_filtered)
+        nr_psms_filtered.append(protein_nr_psms_total - protein_nr_psms_filtered)
         nr_psms_total.append(protein_nr_psms_total)
         for k, v in tmt_s.items():
             _mean_reporter_s[k].append(float(np.nanmean(v)))
@@ -417,8 +417,8 @@ def __annotate_chimerys_protein_df(
         # fmt: on
     protein_table["Annotated mean purity"] = mean_purities
     protein_table["Annotated median purity"] = median_purites
-    protein_table["Annotated number of filtered PSMs"] = nr_psms_filtered
-    protein_table["Annotated number of total PSMs"] = nr_psms_total
+    protein_table["Annotated number of PSMs (unfiltered)"] = nr_psms_total
+    protein_table["Annotated number of PSMs (filtered)"] = nr_psms_filtered
     return protein_table
 
 
