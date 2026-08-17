@@ -221,23 +221,12 @@ def __annotate_chimerys_protein_df(
     for i, psm in tqdm(
         psm_table.iterrows(), total=psm_table.shape[0], desc="Filtering PSMs..."
     ):
-        chimerys_coefficient = float(psm["Normalized CHIMERYS Coefficient"])
-        avg_reporter_sn = float(psm["Average Reporter S/N"])
         proteins = [
             protein.strip() for protein in str(psm["Protein Accessions"]).split(";")
         ]
         protein = proteins[0]
         # remove ambiguous PSMs / shared peptides
         if len(proteins) != 1:
-            continue
-        # remove PSMs with Chimerys Coefficient < threshold
-        if (
-            pd.isna(chimerys_coefficient)
-            or chimerys_coefficient < min_chimerys_coefficient
-        ):
-            continue
-        # remove PSMs with too low average reporter S/N
-        if pd.isna(avg_reporter_sn) or avg_reporter_sn < min_avg_reporter_sn:
             continue
         if protein in psms_by_proteins:
             psms_by_proteins[protein].append(psm)
@@ -267,6 +256,17 @@ def __annotate_chimerys_protein_df(
         tmt_quants = {key: 0.0 for key in TMT.keys()}
         purities: List[float] = list()
         for psm in psms_for_accession:
+            chimerys_coefficient = float(psm["Normalized CHIMERYS Coefficient"])
+            # remove PSMs with Chimerys Coefficient < threshold
+            if (
+                pd.isna(chimerys_coefficient)
+                or chimerys_coefficient < min_chimerys_coefficient
+            ):
+                continue
+            avg_reporter_sn = float(psm["Average Reporter S/N"])
+            # remove PSMs with too low average reporter S/N
+            if pd.isna(avg_reporter_sn) or avg_reporter_sn < min_avg_reporter_sn:
+                continue
             purity = float(psm["Co-Isolation Purity"])
             if pd.isna(purity):
                 continue
