@@ -113,6 +113,14 @@ def main(argv=None) -> pd.DataFrame:
             widget="FileChooser",
         )
         opt.add_argument(
+            "-d",
+            "--delimiter",
+            dest="spectronaut_sep",
+            default=";",
+            help="Delimiter in the Spectronaut result file, by default ';' is used.",
+            type=str,
+        )
+        opt.add_argument(
             "-v",
             "--verbose",
             dest="verbose",
@@ -153,6 +161,7 @@ def main(argv=None) -> pd.DataFrame:
             resolution_gui_map=resolution_gui_map,
             window_file=args.window_file,
             verbose=int(args.verbose),
+            spectronaut_sep=str(args.spectronaut_sep).strip(),
         )
         df = __annotate_result_conditions(df, settings["conditions"])
         df = __annotate_spectronaut_pgs(df, settings)

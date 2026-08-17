@@ -507,10 +507,11 @@ def __annotate_spectronaut_result(
     resolution_gui_map: Optional[Dict[str, Dict[int, pd.Series]]] = None,
     window_file: Optional[str] = None,
     verbose: int = 2,
+    spectronaut_sep: str = SPECTRONAUT_SEP,
 ) -> pd.DataFrame:
     # spectra should be given by __read_spectra
     # settings should be given by __read_settings
-    df = pd.read_csv(spectronaut_filename, sep=SPECTRONAUT_SEP, low_memory=False)
+    df = pd.read_csv(spectronaut_filename, sep=spectronaut_sep, low_memory=False)
     # subset to only precursors from ms file
     _head, tail = os.path.split(spectrum_filename)
     filter_spectrum_filename = tail[:-4] if tail[-4:].lower() == ".raw" else tail
@@ -708,6 +709,14 @@ def main(argv=None) -> pd.DataFrame:
         type=str,
     )
     parser.add_argument(
+        "-d",
+        "--delimiter",
+        dest="spectronaut_sep",
+        default=";",
+        help="Delimiter in the Spectronaut result file, by default ';' is used.",
+        type=str,
+    )
+    parser.add_argument(
         "-v",
         "--verbose",
         dest="verbose",
@@ -746,6 +755,7 @@ def main(argv=None) -> pd.DataFrame:
         resolution_gui_map=resolution_gui_map,
         window_file=args.window_file,
         verbose=int(args.verbose),
+        spectronaut_sep=str(args.spectronaut_sep).strip(),
     )
     df = __annotate_result_conditions(df, settings["conditions"])
     df = __annotate_spectronaut_pgs(df, settings)
