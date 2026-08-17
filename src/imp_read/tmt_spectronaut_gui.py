@@ -172,6 +172,10 @@ def main(argv=None) -> pd.DataFrame:
             sep=",",
             index=False,
         )
+        df.to_parquet(
+            args.spectronaut.split(".csv")[0] + "_purity_tmt_quant.parquet",
+            index=False,
+        )
         print("Script finished successfully!")
         return df
 
