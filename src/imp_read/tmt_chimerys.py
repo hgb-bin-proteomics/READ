@@ -238,6 +238,10 @@ def __annotate_chimerys_protein_df(
     nr_psms_filtered: List[int] = list()
     nr_psms_total: List[int] = list()
     # unfiltered
+    _mean_reporter_s = {key: [] for key in TMT.keys()}
+    _median_reporter_s = {key: [] for key in TMT.keys()}
+    _min_reporter_s = {key: [] for key in TMT.keys()}
+    _max_reporter_s = {key: [] for key in TMT.keys()}
     _mean_reporter_sn = {key: [] for key in TMT.keys()}
     _median_reporter_sn = {key: [] for key in TMT.keys()}
     _min_reporter_sn = {key: [] for key in TMT.keys()}
@@ -247,6 +251,10 @@ def __annotate_chimerys_protein_df(
     _min_reporter_res = {key: [] for key in TMT.keys()}
     _max_reporter_res = {key: [] for key in TMT.keys()}
     # filtered
+    _mean_reporter_s_f = {key: [] for key in TMT.keys()}
+    _median_reporter_s_f = {key: [] for key in TMT.keys()}
+    _min_reporter_s_f = {key: [] for key in TMT.keys()}
+    _max_reporter_s_f = {key: [] for key in TMT.keys()}
     _mean_reporter_sn_f = {key: [] for key in TMT.keys()}
     _median_reporter_sn_f = {key: [] for key in TMT.keys()}
     _min_reporter_sn_f = {key: [] for key in TMT.keys()}
@@ -277,6 +285,8 @@ def __annotate_chimerys_protein_df(
         purities: List[float] = list()
         protein_nr_psms_filtered = 0
         protein_nr_psms_total = 0
+        tmt_s = {key: [float("nan")] for key in TMT.keys()}
+        tmt_s_f = {key: [float("nan")] for key in TMT.keys()}
         tmt_sn = {key: [float("nan")] for key in TMT.keys()}
         tmt_sn_f = {key: [float("nan")] for key in TMT.keys()}
         tmt_res = {key: [float("nan")] for key in TMT.keys()}
@@ -331,8 +341,10 @@ def __annotate_chimerys_protein_df(
                         tmt_quants[c] += 0.0
                     else:
                         tmt_quants[c] += psm[f"Annotated {c}"]
+                        tmt_s_f[c].append(s)
                         tmt_sn_f[c].append(s / n)
                         tmt_res_f[c].append(reporter_resolution)
+                    tmt_s[c].append(s)
                     tmt_sn[c].append(s / n)
                     tmt_res[c].append(reporter_resolution)
             else:
@@ -345,6 +357,16 @@ def __annotate_chimerys_protein_df(
         median_purites.append(float(np.median(purities)))
         nr_psms_filtered.append(protein_nr_psms_filtered)
         nr_psms_total.append(protein_nr_psms_total)
+        for k, v in tmt_s.items():
+            _mean_reporter_s[k].append(float(np.nanmean(v)))
+            _median_reporter_s[k].append(float(np.nanmedian(v)))
+            _min_reporter_s[k].append(float(np.nanmin(v)))
+            _max_reporter_s[k].append(float(np.nanmax(v)))
+        for k, v in tmt_s_f.items():
+            _mean_reporter_s_f[k].append(float(np.nanmean(v)))
+            _median_reporter_s_f[k].append(float(np.nanmedian(v)))
+            _min_reporter_s_f[k].append(float(np.nanmin(v)))
+            _max_reporter_s_f[k].append(float(np.nanmax(v)))
         for k, v in tmt_sn.items():
             _mean_reporter_sn[k].append(float(np.nanmean(v)))
             _median_reporter_sn[k].append(float(np.nanmedian(v)))
@@ -368,6 +390,14 @@ def __annotate_chimerys_protein_df(
     for key in channels.keys():
         protein_table[f"Annotated protein-level {key}"] = channels[key]
         # fmt: off
+        protein_table[f"Annotated mean {key} S (unfiltered)"] = _mean_reporter_s[key]
+        protein_table[f"Annotated mean {key} S (filtered)"] = _mean_reporter_s_f[key]
+        protein_table[f"Annotated median {key} S (unfiltered)"] = _median_reporter_s[key]
+        protein_table[f"Annotated median {key} S (filtered)"] = _median_reporter_s_f[key]
+        protein_table[f"Annotated min {key} S (unfiltered)"] = _min_reporter_s[key]
+        protein_table[f"Annotated min {key} S (filtered)"] = _min_reporter_s_f[key]
+        protein_table[f"Annotated max {key} S (unfiltered)"] = _max_reporter_s[key]
+        protein_table[f"Annotated max {key} S (filtered)"] = _max_reporter_s_f[key]
         protein_table[f"Annotated mean {key} S/N (unfiltered)"] = _mean_reporter_sn[key]
         protein_table[f"Annotated mean {key} S/N (filtered)"] = _mean_reporter_sn_f[key]
         protein_table[f"Annotated median {key} S/N (unfiltered)"] = _median_reporter_sn[key]
