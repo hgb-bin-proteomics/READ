@@ -82,6 +82,16 @@ def main(argv=None) -> pd.DataFrame:
         )
         opt = parser.add_argument_group("Optional", "Optional Arguments.")
         opt.add_argument(
+            "-t",
+            "--ini",
+            dest="ini_file",
+            required=False,
+            default=None,
+            help="Path/name of the INI configuration file for the OpenMS IsobaricAnalyzer.",
+            type=str,
+            widget="FileChooser",
+        )
+        opt.add_argument(
             "-p",
             "--proteins",
             dest="proteins",
@@ -110,7 +120,13 @@ def main(argv=None) -> pd.DataFrame:
         quantification_method = int(settings["quantification_method"])
         consensusXML_map = None
         if quantification_method != 1 and quantification_method != 3:
-            consensusXML_df = __get_consensusXML_df(args_spectra)
+            if args.ini_file is None:
+                raise RuntimeError(
+                    "Quantification with OpenMS was selected but no OpenMS IsobaricAnalyzer "
+                    "configuration file was given! Please select one with -t or --ini, or "
+                    "select a different quantification approach!"
+                )
+            consensusXML_df = __get_consensusXML_df(args_spectra, args.ini_file)
             consensusXML_map = __get_consensusXML_map(consensusXML_df)
         resolution_gui_map = None
         if args.resolution is not None:

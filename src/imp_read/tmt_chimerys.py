@@ -429,7 +429,7 @@ def __read_settings(toml: str) -> Dict[str, Any]:
     }
 
 
-def __get_consensusXML_df(spectrum_filename: str) -> pd.DataFrame:
+def __get_consensusXML_df(spectrum_filename: str, ini_file: str) -> pd.DataFrame:
     in_name = spectrum_filename
     out_name = f"{spectrum_filename}.consensusXML"
     # see https://openms.de/documentation/html/TOPP_IsobaricAnalyzer.html
@@ -443,7 +443,7 @@ def __get_consensusXML_df(spectrum_filename: str) -> pd.DataFrame:
             "-out",
             out_name,
             "-ini",
-            "tmt18plex_default.ini",
+            ini_file,
         ]
     )
     # see https://pyopenms.readthedocs.io/en/latest/user_guide/other_ms_data_formats.html#quantiative-data-featurexml-consensusxml
@@ -1177,6 +1177,14 @@ def main(argv=None) -> pd.DataFrame:
         help="Window file, overrides config file!",
         type=str,
     )
+    parser.add_argument(
+        "-t",
+        "--ini",
+        dest="ini_file",
+        default=None,
+        help="Path/name of the INI configuration file for the OpenMS IsobaricAnalyzer.",
+        type=str,
+    )
     parser.add_argument("--version", action="version", version=__version)
     args = parser.parse_args(argv)
     settings = __read_settings(args.config)
@@ -1188,7 +1196,13 @@ def main(argv=None) -> pd.DataFrame:
     quantification_method = int(settings["quantification_method"])
     consensusXML_map = None
     if quantification_method != 1 and quantification_method != 3:
-        consensusXML_df = __get_consensusXML_df(args_spectra)
+        if args.ini_file is None:
+            raise RuntimeError(
+                "Quantification with OpenMS was selected but no OpenMS IsobaricAnalyzer "
+                "configuration file was given! Please select one with -t or --ini, or "
+                "select a different quantification approach!"
+            )
+        consensusXML_df = __get_consensusXML_df(args_spectra, args.ini_file)
         consensusXML_map = __get_consensusXML_map(consensusXML_df)
     resolution_gui_map = None
     if args.resolution is not None:
