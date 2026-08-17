@@ -438,10 +438,18 @@ def main(argv=None) -> pd.DataFrame:
         sep="\t",
         index=False,
     )
+    df.to_parquet(
+        args.chimerys.split(".txt")[0] + "_purity_tmt_quant.parquet",
+        index=False,
+    )
     df = __annotate_result_conditions(df, settings["conditions"])
     df.to_csv(
         args.chimerys.split(".txt")[0] + "_purity_tmt_quant_conditions.txt",
         sep="\t",
+        index=False,
+    )
+    df.to_parquet(
+        args.chimerys.split(".txt")[0] + "_purity_tmt_quant_conditions.parquet",
         index=False,
     )
     if args.proteins is not None:
@@ -449,6 +457,10 @@ def main(argv=None) -> pd.DataFrame:
         proteins_df.to_csv(
             args.proteins.split(".txt")[0] + "_purity_tmt_quant.txt",
             sep="\t",
+            index=False,
+        )
+        proteins_df.to_parquet(
+            args.proteins.split(".txt")[0] + "_purity_tmt_quant.parquet",
             index=False,
         )
     return df
