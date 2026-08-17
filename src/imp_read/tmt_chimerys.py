@@ -235,6 +235,8 @@ def __annotate_chimerys_protein_df(
     channels = {key: [] for key in TMT.keys()}
     mean_purities: List[float] = list()
     median_purites: List[float] = list()
+    nr_psms_filtered: List[int] = list()
+    nr_psms_total: List[int] = list()
     for i, protein in tqdm(
         protein_table.iterrows(),
         total=protein_table.shape[0],
@@ -255,6 +257,8 @@ def __annotate_chimerys_protein_df(
         #     )
         tmt_quants = {key: 0.0 for key in TMT.keys()}
         purities: List[float] = list()
+        protein_nr_psms_filtered = 0
+        protein_nr_psms_total = 0
         for psm in psms_for_accession:
             chimerys_coefficient = float(psm["Normalized CHIMERYS Coefficient"])
             # remove PSMs with Chimerys Coefficient < threshold
@@ -262,16 +266,20 @@ def __annotate_chimerys_protein_df(
                 pd.isna(chimerys_coefficient)
                 or chimerys_coefficient < min_chimerys_coefficient
             ):
+                protein_nr_psms_filtered += 1
                 continue
             avg_reporter_sn = float(psm["Average Reporter S/N"])
             # remove PSMs with too low average reporter S/N
             if pd.isna(avg_reporter_sn) or avg_reporter_sn < min_avg_reporter_sn:
+                protein_nr_psms_filtered += 1
                 continue
             purity = float(psm["Co-Isolation Purity"])
             if pd.isna(purity):
+                protein_nr_psms_filtered += 1
                 continue
             purities.append(purity)
             if purity < min_purity:
+                protein_nr_psms_filtered += 1
                 continue
             if has_resolution:
                 for c in TMT.keys():
@@ -302,14 +310,19 @@ def __annotate_chimerys_protein_df(
             else:
                 for c in TMT.keys():
                     tmt_quants[c] += psm[f"Annotated {c}"]
+            protein_nr_psms_total += 1
         for k, v in tmt_quants.items():
             channels[k].append(v)
         mean_purities.append(float(np.mean(purities)))
         median_purites.append(float(np.median(purities)))
+        nr_psms_filtered.append(protein_nr_psms_filtered)
+        nr_psms_total.append(protein_nr_psms_total)
     for key in channels.keys():
         protein_table[f"Annotated protein-level {key}"] = channels[key]
     protein_table["Annotated mean purity"] = mean_purities
     protein_table["Annotated median purity"] = median_purites
+    protein_table["Annotated number of filtered PSMs"] = nr_psms_filtered
+    protein_table["Annotated number of total PSMs"] = nr_psms_total
     return protein_table
 
 
