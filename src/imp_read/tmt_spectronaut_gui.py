@@ -34,7 +34,8 @@ def main(argv=None) -> pd.DataFrame:
 
     @Gooey(
         encoding="utf-8",
-        program_name=f"TMT Spectronaut {__version}",
+        program_name=f"READ for Spectronaut {__version}",
+        default_size=(700, 800),
         menu=[
             {
                 "name": "Help",
@@ -42,7 +43,7 @@ def main(argv=None) -> pd.DataFrame:
                     {
                         "type": "Link",
                         "menuTitle": "Project Page",
-                        "url": "https://github.com/hgb-bin-proteomics/TMT/",
+                        "url": "https://github.com/hgb-bin-proteomics/READ/",
                     }
                 ],
             }
