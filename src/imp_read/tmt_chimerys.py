@@ -168,6 +168,9 @@ def __get_sn_for_condition(row: pd.Series, reporters: List[str]) -> Tuple[float,
         reporter_signal = 0.0
         reporter_noise = 0.0
         label = reporter.split("-")[1].strip()
+        # i don't really remember why this is branching here, probably because the
+        # 134C label has a miss-spelled intensity column, and I didn't remember that
+        # this doesn't affect the noise column
         if label == "134C":
             if not pd.isna(row[f"Annotated {reporter}"]):  # pyright: ignore[reportGeneralTypeIssues]
                 reporter_signal = float(row[f"Annotated {reporter}"])
