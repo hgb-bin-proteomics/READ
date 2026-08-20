@@ -24,5 +24,5 @@ __all__ = [
     "tmt_spectronaut",
     "tmt_spectronaut_gui",
 ]
-__version__ = "2026.8.17"
+__version__ = "2026.8.20"
 __author__ = "Micha Johannes Birklbauer"
