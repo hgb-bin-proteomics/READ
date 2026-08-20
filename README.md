@@ -1,13 +1,21 @@
 # READ
 _\[R\]eporter Ion \[E\]xtractor and \[A\]nnotation \[D\]irector_
 
-<img src="https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo.png" class="dark-light" align="left" width="200px" style="padding: 5px 20px 10px 20px;"/>
+<img src="https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo_padded.png" class="dark-light" align="left" width="200px" style="padding: 5px 20px 10px 20px;"/>
 
-**READ** is a python-based tool and to orchestrate
+**READ** is a python-based tool to orchestrate
 TMTpro-18plex quantification for \[single cell\] DIA and DDA searches with
 [Chimerys](https://www.msaid.de/chimerys),
 [Spectronaut](https://biognosys.com/software/spectronaut/), and
 [DIA-NN](https://github.com/vdemichev/DiaNN).
+
+**READ** supports Thermo RAW files via [ThermoRawFileParser](https://github.com/compomics/ThermoRawFileParser) or [mzML](https://www.psidev.info/mzml) files, maps
+identified precursors to their corresponding MS1 and MS2 spectra, and then quantifies PSMs and/or proteins. Quantification is done either natively, via [OpenMS](https://openms.de/) (recommended), or
+the TMT Resolution GUI Tool [\[1\]](https://doi.org/10.1038/s41467-025-60022-x) (see also below). Quantification is additionally quality controlled by optionally several filters including precursor co-isolation purity, reporter ion resolution,
+minimum reporter signal, and minimum reporter signal-to-noise.
+
+**READ** can easily be installed via [PyPI](https://pypi.org/p/IMP-READ/) and run via the commandline. We also provide executables with a graphical user interface for Microsoft Windows
+at [this repository](https://github.com/hgb-bin-proteomics/READ-GUI). In-depth information on how to install and run **READ** can be found below.
 
 ## Requirements
 
