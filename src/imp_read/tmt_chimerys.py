@@ -25,8 +25,8 @@ from typing import Tuple
 from typing import Any
 
 
-__version = "2.1.3"
-__date = "2026-04-27"
+__version = "2.2.0"
+__date = "2026-08-17"
 
 TMT_TOLERANCE = 0.0025
 TMT = {
@@ -168,6 +168,9 @@ def __get_sn_for_condition(row: pd.Series, reporters: List[str]) -> Tuple[float,
         reporter_signal = 0.0
         reporter_noise = 0.0
         label = reporter.split("-")[1].strip()
+        # i don't really remember why this is branching here, probably because the
+        # 134C label has a miss-spelled intensity column, and I didn't remember that
+        # this doesn't affect the noise column
         if label == "134C":
             if not pd.isna(row[f"Annotated {reporter}"]):  # pyright: ignore[reportGeneralTypeIssues]
                 reporter_signal = float(row[f"Annotated {reporter}"])
@@ -218,23 +221,12 @@ def __annotate_chimerys_protein_df(
     for i, psm in tqdm(
         psm_table.iterrows(), total=psm_table.shape[0], desc="Filtering PSMs..."
     ):
-        chimerys_coefficient = float(psm["Normalized CHIMERYS Coefficient"])
-        avg_reporter_sn = float(psm["Average Reporter S/N"])
         proteins = [
             protein.strip() for protein in str(psm["Protein Accessions"]).split(";")
         ]
         protein = proteins[0]
         # remove ambiguous PSMs / shared peptides
         if len(proteins) != 1:
-            continue
-        # remove PSMs with Chimerys Coefficient < threshold
-        if (
-            pd.isna(chimerys_coefficient)
-            or chimerys_coefficient < min_chimerys_coefficient
-        ):
-            continue
-        # remove PSMs with too low average reporter S/N
-        if pd.isna(avg_reporter_sn) or avg_reporter_sn < min_avg_reporter_sn:
             continue
         if protein in psms_by_proteins:
             psms_by_proteins[protein].append(psm)
@@ -243,6 +235,34 @@ def __annotate_chimerys_protein_df(
     channels = {key: [] for key in TMT.keys()}
     mean_purities: List[float] = list()
     median_purites: List[float] = list()
+    nr_psms_filtered: List[int] = list()
+    nr_psms_total: List[int] = list()
+    # unfiltered
+    _mean_reporter_s = {key: [] for key in TMT.keys()}
+    _median_reporter_s = {key: [] for key in TMT.keys()}
+    _min_reporter_s = {key: [] for key in TMT.keys()}
+    _max_reporter_s = {key: [] for key in TMT.keys()}
+    _mean_reporter_sn = {key: [] for key in TMT.keys()}
+    _median_reporter_sn = {key: [] for key in TMT.keys()}
+    _min_reporter_sn = {key: [] for key in TMT.keys()}
+    _max_reporter_sn = {key: [] for key in TMT.keys()}
+    _mean_reporter_res = {key: [] for key in TMT.keys()}
+    _median_reporter_res = {key: [] for key in TMT.keys()}
+    _min_reporter_res = {key: [] for key in TMT.keys()}
+    _max_reporter_res = {key: [] for key in TMT.keys()}
+    # filtered
+    _mean_reporter_s_f = {key: [] for key in TMT.keys()}
+    _median_reporter_s_f = {key: [] for key in TMT.keys()}
+    _min_reporter_s_f = {key: [] for key in TMT.keys()}
+    _max_reporter_s_f = {key: [] for key in TMT.keys()}
+    _mean_reporter_sn_f = {key: [] for key in TMT.keys()}
+    _median_reporter_sn_f = {key: [] for key in TMT.keys()}
+    _min_reporter_sn_f = {key: [] for key in TMT.keys()}
+    _max_reporter_sn_f = {key: [] for key in TMT.keys()}
+    _mean_reporter_res_f = {key: [] for key in TMT.keys()}
+    _median_reporter_res_f = {key: [] for key in TMT.keys()}
+    _min_reporter_res_f = {key: [] for key in TMT.keys()}
+    _max_reporter_res_f = {key: [] for key in TMT.keys()}
     for i, protein in tqdm(
         protein_table.iterrows(),
         total=protein_table.shape[0],
@@ -263,20 +283,45 @@ def __annotate_chimerys_protein_df(
         #     )
         tmt_quants = {key: 0.0 for key in TMT.keys()}
         purities: List[float] = list()
+        protein_nr_psms_filtered = 0
+        protein_nr_psms_total = 0
+        tmt_s = {key: [float("nan")] for key in TMT.keys()}
+        tmt_s_f = {key: [float("nan")] for key in TMT.keys()}
+        tmt_sn = {key: [float("nan")] for key in TMT.keys()}
+        tmt_sn_f = {key: [float("nan")] for key in TMT.keys()}
+        tmt_res = {key: [float("nan")] for key in TMT.keys()}
+        tmt_res_f = {key: [float("nan")] for key in TMT.keys()}
         for psm in psms_for_accession:
+            chimerys_coefficient = float(psm["Normalized CHIMERYS Coefficient"])
+            # remove PSMs with Chimerys Coefficient < threshold
+            if (
+                pd.isna(chimerys_coefficient)
+                or chimerys_coefficient < min_chimerys_coefficient
+            ):
+                protein_nr_psms_filtered += 1
+                continue
+            avg_reporter_sn = float(psm["Average Reporter S/N"])
+            # remove PSMs with too low average reporter S/N
+            if pd.isna(avg_reporter_sn) or avg_reporter_sn < min_avg_reporter_sn:
+                protein_nr_psms_filtered += 1
+                continue
             purity = float(psm["Co-Isolation Purity"])
             if pd.isna(purity):
+                protein_nr_psms_filtered += 1
                 continue
             purities.append(purity)
             if purity < min_purity:
+                protein_nr_psms_filtered += 1
                 continue
             if has_resolution:
                 for c in TMT.keys():
                     resgui_key = "RESGUI_" + c.split("-")[1] + " Resolution"
+                    s, n = __get_sn_for_condition(psm, [c])
+                    reporter_resolution = float(psm[resgui_key])
                     eligible_for_quant = True
-                    if pd.isna(float(psm[resgui_key])):
+                    if pd.isna(reporter_resolution):
                         eligible_for_quant = False
-                    if float(psm[resgui_key]) < min_reporter_res:
+                    if reporter_resolution < min_reporter_res:
                         eligible_for_quant = False
                     for condition in conditions:
                         if (
@@ -296,17 +341,84 @@ def __annotate_chimerys_protein_df(
                         tmt_quants[c] += 0.0
                     else:
                         tmt_quants[c] += psm[f"Annotated {c}"]
+                        tmt_s_f[c].append(s)
+                        tmt_sn_f[c].append(s / n)
+                        tmt_res_f[c].append(reporter_resolution)
+                    tmt_s[c].append(s)
+                    tmt_sn[c].append(s / n)
+                    tmt_res[c].append(reporter_resolution)
             else:
                 for c in TMT.keys():
                     tmt_quants[c] += psm[f"Annotated {c}"]
+            protein_nr_psms_total += 1
         for k, v in tmt_quants.items():
             channels[k].append(v)
         mean_purities.append(float(np.mean(purities)))
         median_purites.append(float(np.median(purities)))
+        nr_psms_filtered.append(protein_nr_psms_total - protein_nr_psms_filtered)
+        nr_psms_total.append(protein_nr_psms_total)
+        for k, v in tmt_s.items():
+            _mean_reporter_s[k].append(float(np.nanmean(v)))
+            _median_reporter_s[k].append(float(np.nanmedian(v)))
+            _min_reporter_s[k].append(float(np.nanmin(v)))
+            _max_reporter_s[k].append(float(np.nanmax(v)))
+        for k, v in tmt_s_f.items():
+            _mean_reporter_s_f[k].append(float(np.nanmean(v)))
+            _median_reporter_s_f[k].append(float(np.nanmedian(v)))
+            _min_reporter_s_f[k].append(float(np.nanmin(v)))
+            _max_reporter_s_f[k].append(float(np.nanmax(v)))
+        for k, v in tmt_sn.items():
+            _mean_reporter_sn[k].append(float(np.nanmean(v)))
+            _median_reporter_sn[k].append(float(np.nanmedian(v)))
+            _min_reporter_sn[k].append(float(np.nanmin(v)))
+            _max_reporter_sn[k].append(float(np.nanmax(v)))
+        for k, v in tmt_sn_f.items():
+            _mean_reporter_sn_f[k].append(float(np.nanmean(v)))
+            _median_reporter_sn_f[k].append(float(np.nanmedian(v)))
+            _min_reporter_sn_f[k].append(float(np.nanmin(v)))
+            _max_reporter_sn_f[k].append(float(np.nanmax(v)))
+        for k, v in tmt_res.items():
+            _mean_reporter_res[k].append(float(np.nanmean(v)))
+            _median_reporter_res[k].append(float(np.nanmedian(v)))
+            _min_reporter_res[k].append(float(np.nanmin(v)))
+            _max_reporter_res[k].append(float(np.nanmax(v)))
+        for k, v in tmt_res_f.items():
+            _mean_reporter_res_f[k].append(float(np.nanmean(v)))
+            _median_reporter_res_f[k].append(float(np.nanmedian(v)))
+            _min_reporter_res_f[k].append(float(np.nanmin(v)))
+            _max_reporter_res_f[k].append(float(np.nanmax(v)))
     for key in channels.keys():
         protein_table[f"Annotated protein-level {key}"] = channels[key]
+        # fmt: off
+        protein_table[f"Annotated mean {key} S (unfiltered)"] = _mean_reporter_s[key]
+        protein_table[f"Annotated mean {key} S (filtered)"] = _mean_reporter_s_f[key]
+        protein_table[f"Annotated median {key} S (unfiltered)"] = _median_reporter_s[key]
+        protein_table[f"Annotated median {key} S (filtered)"] = _median_reporter_s_f[key]
+        protein_table[f"Annotated min {key} S (unfiltered)"] = _min_reporter_s[key]
+        protein_table[f"Annotated min {key} S (filtered)"] = _min_reporter_s_f[key]
+        protein_table[f"Annotated max {key} S (unfiltered)"] = _max_reporter_s[key]
+        protein_table[f"Annotated max {key} S (filtered)"] = _max_reporter_s_f[key]
+        protein_table[f"Annotated mean {key} S/N (unfiltered)"] = _mean_reporter_sn[key]
+        protein_table[f"Annotated mean {key} S/N (filtered)"] = _mean_reporter_sn_f[key]
+        protein_table[f"Annotated median {key} S/N (unfiltered)"] = _median_reporter_sn[key]
+        protein_table[f"Annotated median {key} S/N (filtered)"] = _median_reporter_sn_f[key]
+        protein_table[f"Annotated min {key} S/N (unfiltered)"] = _min_reporter_sn[key]
+        protein_table[f"Annotated min {key} S/N (filtered)"] = _min_reporter_sn_f[key]
+        protein_table[f"Annotated max {key} S/N (unfiltered)"] = _max_reporter_sn[key]
+        protein_table[f"Annotated max {key} S/N (filtered)"] = _max_reporter_sn_f[key]
+        protein_table[f"Annotated mean {key} resolution (unfiltered)"] = _mean_reporter_res[key]
+        protein_table[f"Annotated mean {key} resolution (filtered)"] = _mean_reporter_res_f[key]
+        protein_table[f"Annotated median {key} resolution (unfiltered)"] = _median_reporter_res[key]
+        protein_table[f"Annotated median {key} resolution (filtered)"] = _median_reporter_res_f[key]
+        protein_table[f"Annotated min {key} resolution (unfiltered)"] = _min_reporter_res[key]
+        protein_table[f"Annotated min {key} resolution (filtered)"] = _min_reporter_res_f[key]
+        protein_table[f"Annotated max {key} resolution (unfiltered)"] = _max_reporter_res[key]
+        protein_table[f"Annotated max {key} resolution (filtered)"] = _max_reporter_res_f[key]
+        # fmt: on
     protein_table["Annotated mean purity"] = mean_purities
     protein_table["Annotated median purity"] = median_purites
+    protein_table["Annotated number of PSMs (unfiltered)"] = nr_psms_total
+    protein_table["Annotated number of PSMs (filtered)"] = nr_psms_filtered
     return protein_table
 
 
@@ -413,7 +525,7 @@ def __read_settings(toml: str) -> Dict[str, Any]:
     }
 
 
-def __get_consensusXML_df(spectrum_filename: str) -> pd.DataFrame:
+def __get_consensusXML_df(spectrum_filename: str, ini_file: str) -> pd.DataFrame:
     in_name = spectrum_filename
     out_name = f"{spectrum_filename}.consensusXML"
     # see https://openms.de/documentation/html/TOPP_IsobaricAnalyzer.html
@@ -427,7 +539,7 @@ def __get_consensusXML_df(spectrum_filename: str) -> pd.DataFrame:
             "-out",
             out_name,
             "-ini",
-            "tmt18plex_default.ini",
+            ini_file,
         ]
     )
     # see https://pyopenms.readthedocs.io/en/latest/user_guide/other_ms_data_formats.html#quantiative-data-featurexml-consensusxml
@@ -1161,6 +1273,14 @@ def main(argv=None) -> pd.DataFrame:
         help="Window file, overrides config file!",
         type=str,
     )
+    parser.add_argument(
+        "-t",
+        "--ini",
+        dest="ini_file",
+        default=None,
+        help="Path/name of the INI configuration file for the OpenMS IsobaricAnalyzer.",
+        type=str,
+    )
     parser.add_argument("--version", action="version", version=__version)
     args = parser.parse_args(argv)
     settings = __read_settings(args.config)
@@ -1172,7 +1292,13 @@ def main(argv=None) -> pd.DataFrame:
     quantification_method = int(settings["quantification_method"])
     consensusXML_map = None
     if quantification_method != 1 and quantification_method != 3:
-        consensusXML_df = __get_consensusXML_df(args_spectra)
+        if args.ini_file is None:
+            raise RuntimeError(
+                "Quantification with OpenMS was selected but no OpenMS IsobaricAnalyzer "
+                "configuration file was given! Please select one with -t or --ini, or "
+                "select a different quantification approach!"
+            )
+        consensusXML_df = __get_consensusXML_df(args_spectra, args.ini_file)
         consensusXML_map = __get_consensusXML_map(consensusXML_df)
     resolution_gui_map = None
     if args.resolution is not None:
@@ -1191,10 +1317,18 @@ def main(argv=None) -> pd.DataFrame:
         sep="\t",
         index=False,
     )
+    df.to_parquet(
+        args.chimerys.split(".txt")[0] + "_purity_tmt_quant.parquet",
+        index=False,
+    )
     df = __annotate_result_conditions(df, settings["conditions"])
     df.to_csv(
         args.chimerys.split(".txt")[0] + "_purity_tmt_quant_conditions.txt",
         sep="\t",
+        index=False,
+    )
+    df.to_parquet(
+        args.chimerys.split(".txt")[0] + "_purity_tmt_quant_conditions.parquet",
         index=False,
     )
     if args.proteins is not None:
@@ -1202,6 +1336,10 @@ def main(argv=None) -> pd.DataFrame:
         proteins_df.to_csv(
             args.proteins.split(".txt")[0] + "_purity_tmt_quant.txt",
             sep="\t",
+            index=False,
+        )
+        proteins_df.to_parquet(
+            args.proteins.split(".txt")[0] + "_purity_tmt_quant.parquet",
             index=False,
         )
     return df

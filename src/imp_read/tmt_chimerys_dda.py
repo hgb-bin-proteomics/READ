@@ -34,8 +34,8 @@ from .tmt_chimerys import __annotate_result_conditions
 from .tmt_chimerys import __annotate_chimerys_protein_table
 from .tmt_chimerys import __convert
 
-__version = "2.1.0"
-__date = "2025-11-13"
+__version = "2.2.0"
+__date = "2026-08-17"
 
 ISOTOPE = 1.00335
 STRATEGY = 1
@@ -397,6 +397,14 @@ def main(argv=None) -> pd.DataFrame:
         help="Path/name of the resolution.csv file from the Resolution GUI file.",
         type=str,
     )
+    parser.add_argument(
+        "-t",
+        "--ini",
+        dest="ini_file",
+        default=None,
+        help="Path/name of the INI configuration file for the OpenMS IsobaricAnalyzer.",
+        type=str,
+    )
     parser.add_argument("--version", action="version", version=__version)
     args = parser.parse_args(argv)
     settings = __read_settings(args.config)
@@ -406,7 +414,13 @@ def main(argv=None) -> pd.DataFrame:
     quantification_method = int(settings["quantification_method"])
     consensusXML_map = None
     if quantification_method != 1 and quantification_method != 3:
-        consensusXML_df = __get_consensusXML_df(args_spectra)
+        if args.ini_file is None:
+            raise RuntimeError(
+                "Quantification with OpenMS was selected but no OpenMS IsobaricAnalyzer "
+                "configuration file was given! Please select one with -t or --ini, or "
+                "select a different quantification approach!"
+            )
+        consensusXML_df = __get_consensusXML_df(args_spectra, args.ini_file)
         consensusXML_map = __get_consensusXML_map(consensusXML_df)
     resolution_gui_map = None
     if args.resolution is not None:
@@ -424,10 +438,18 @@ def main(argv=None) -> pd.DataFrame:
         sep="\t",
         index=False,
     )
+    df.to_parquet(
+        args.chimerys.split(".txt")[0] + "_purity_tmt_quant.parquet",
+        index=False,
+    )
     df = __annotate_result_conditions(df, settings["conditions"])
     df.to_csv(
         args.chimerys.split(".txt")[0] + "_purity_tmt_quant_conditions.txt",
         sep="\t",
+        index=False,
+    )
+    df.to_parquet(
+        args.chimerys.split(".txt")[0] + "_purity_tmt_quant_conditions.parquet",
         index=False,
     )
     if args.proteins is not None:
@@ -435,6 +457,10 @@ def main(argv=None) -> pd.DataFrame:
         proteins_df.to_csv(
             args.proteins.split(".txt")[0] + "_purity_tmt_quant.txt",
             sep="\t",
+            index=False,
+        )
+        proteins_df.to_parquet(
+            args.proteins.split(".txt")[0] + "_purity_tmt_quant.parquet",
             index=False,
         )
     return df

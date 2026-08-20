@@ -32,7 +32,8 @@ def main(argv=None) -> pd.DataFrame:
 
     @Gooey(
         encoding="utf-8",
-        program_name=f"TMT Chimerys DDA {__version}",
+        program_name=f"READ for Chimerys DDA {__version}",
+        default_size=(700, 800),
         menu=[
             {
                 "name": "Help",
@@ -40,7 +41,7 @@ def main(argv=None) -> pd.DataFrame:
                     {
                         "type": "Link",
                         "menuTitle": "Project Page",
-                        "url": "https://github.com/hgb-bin-proteomics/TMT/",
+                        "url": "https://github.com/hgb-bin-proteomics/READ/",
                     }
                 ],
             }
@@ -82,6 +83,16 @@ def main(argv=None) -> pd.DataFrame:
         )
         opt = parser.add_argument_group("Optional", "Optional Arguments.")
         opt.add_argument(
+            "-t",
+            "--ini",
+            dest="ini_file",
+            required=False,
+            default=None,
+            help="Path/name of the INI configuration file for the OpenMS IsobaricAnalyzer.",
+            type=str,
+            widget="FileChooser",
+        )
+        opt.add_argument(
             "-p",
             "--proteins",
             dest="proteins",
@@ -110,7 +121,13 @@ def main(argv=None) -> pd.DataFrame:
         quantification_method = int(settings["quantification_method"])
         consensusXML_map = None
         if quantification_method != 1 and quantification_method != 3:
-            consensusXML_df = __get_consensusXML_df(args_spectra)
+            if args.ini_file is None:
+                raise RuntimeError(
+                    "Quantification with OpenMS was selected but no OpenMS IsobaricAnalyzer "
+                    "configuration file was given! Please select one with -t or --ini, or "
+                    "select a different quantification approach!"
+                )
+            consensusXML_df = __get_consensusXML_df(args_spectra, args.ini_file)
             consensusXML_map = __get_consensusXML_map(consensusXML_df)
         resolution_gui_map = None
         if args.resolution is not None:
@@ -128,10 +145,18 @@ def main(argv=None) -> pd.DataFrame:
             sep="\t",
             index=False,
         )
+        df.to_parquet(
+            args.chimerys.split(".txt")[0] + "_purity_tmt_quant.parquet",
+            index=False,
+        )
         df = __annotate_result_conditions(df, settings["conditions"])
         df.to_csv(
             args.chimerys.split(".txt")[0] + "_purity_tmt_quant_conditions.txt",
             sep="\t",
+            index=False,
+        )
+        df.to_parquet(
+            args.chimerys.split(".txt")[0] + "_purity_tmt_quant_conditions.parquet",
             index=False,
         )
         if args.proteins is not None:
@@ -139,6 +164,10 @@ def main(argv=None) -> pd.DataFrame:
             proteins_df.to_csv(
                 args.proteins.split(".txt")[0] + "_purity_tmt_quant.txt",
                 sep="\t",
+                index=False,
+            )
+            proteins_df.to_parquet(
+                args.proteins.split(".txt")[0] + "_purity_tmt_quant.parquet",
                 index=False,
             )
         print("Script finished successfully!")

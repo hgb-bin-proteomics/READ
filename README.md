@@ -17,11 +17,11 @@ TMTpro-18plex quantification for \[single cell\] DIA and DDA searches with
 ## Usage
 
 - On Microsoft Windows the applications can be run as standalone executables or as python scripts.
-- Other operating systems are limited to the python scripts, please refer to [CLI.md](docs/CLI.md).
+- Other operating systems are limited to the python scripts, please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md).
 
 ### Graphical User Interface
 
-![GUI screenshot](docs/gui.png)
+![GUI screenshot](https://github.com/hgb-bin-proteomics/READ/raw/master/docs/gui.png)
 
 We provide compiled binaries for Microsoft Windows that offer a graphical user interface. Please download the executables from
 [releases](https://github.com/hgb-bin-proteomics/READ/releases).
@@ -34,12 +34,12 @@ We provide compiled binaries for Microsoft Windows that offer a graphical user i
 
 ### Commandline Interface
 
-Please refer to [CLI.md](docs/CLI.md).
+Please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md).
 
 ### Running the Scripts for Multiple Files
 
 If you want to run the scripts for multiple input files sequentially, please
-refer to [MULTI.md](docs/MULTI.md).
+refer to [MULTI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/MULTI.md).
 
 ### Configuration
 

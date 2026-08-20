@@ -34,7 +34,8 @@ def main(argv=None) -> pd.DataFrame:
 
     @Gooey(
         encoding="utf-8",
-        program_name=f"TMT Spectronaut {__version}",
+        program_name=f"READ for Spectronaut {__version}",
+        default_size=(700, 800),
         menu=[
             {
                 "name": "Help",
@@ -42,7 +43,7 @@ def main(argv=None) -> pd.DataFrame:
                     {
                         "type": "Link",
                         "menuTitle": "Project Page",
-                        "url": "https://github.com/hgb-bin-proteomics/TMT/",
+                        "url": "https://github.com/hgb-bin-proteomics/READ/",
                     }
                 ],
             }
@@ -84,6 +85,16 @@ def main(argv=None) -> pd.DataFrame:
         )
         opt = parser.add_argument_group("Optional", "Optional Arguments.")
         opt.add_argument(
+            "-t",
+            "--ini",
+            dest="ini_file",
+            required=False,
+            default=None,
+            help="Path/name of the INI configuration file for the OpenMS IsobaricAnalyzer.",
+            type=str,
+            widget="FileChooser",
+        )
+        opt.add_argument(
             "-r",
             "--resolution",
             dest="resolution",
@@ -101,6 +112,14 @@ def main(argv=None) -> pd.DataFrame:
             help="Window file, overrides config file!",
             type=str,
             widget="FileChooser",
+        )
+        opt.add_argument(
+            "-d",
+            "--delimiter",
+            dest="spectronaut_sep",
+            default=";",
+            help="Delimiter in the Spectronaut result file, by default ';' is used.",
+            type=str,
         )
         opt.add_argument(
             "-v",
@@ -123,7 +142,13 @@ def main(argv=None) -> pd.DataFrame:
         quantification_method = int(settings["quantification_method"])
         consensusXML_map = None
         if quantification_method != 1 and quantification_method != 3:
-            consensusXML_df = __get_consensusXML_df(args_spectra)
+            if args.ini_file is None:
+                raise RuntimeError(
+                    "Quantification with OpenMS was selected but no OpenMS IsobaricAnalyzer "
+                    "configuration file was given! Please select one with -t or --ini, or "
+                    "select a different quantification approach!"
+                )
+            consensusXML_df = __get_consensusXML_df(args_spectra, args.ini_file)
             consensusXML_map = __get_consensusXML_map(consensusXML_df)
         resolution_gui_map = None
         if args.resolution is not None:
@@ -137,6 +162,7 @@ def main(argv=None) -> pd.DataFrame:
             resolution_gui_map=resolution_gui_map,
             window_file=args.window_file,
             verbose=int(args.verbose),
+            spectronaut_sep=str(args.spectronaut_sep).strip(),
         )
         df = __annotate_result_conditions(df, settings["conditions"])
         df = __annotate_spectronaut_pgs(df, settings)
@@ -145,6 +171,10 @@ def main(argv=None) -> pd.DataFrame:
         df.to_csv(
             args.spectronaut.split(".csv")[0] + "_purity_tmt_quant.csv",
             sep=",",
+            index=False,
+        )
+        df.to_parquet(
+            args.spectronaut.split(".csv")[0] + "_purity_tmt_quant.parquet",
             index=False,
         )
         print("Script finished successfully!")
