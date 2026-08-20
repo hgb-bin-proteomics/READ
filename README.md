@@ -31,7 +31,7 @@ which can be downloaded [here](https://github.com/hgb-bin-proteomics/READ/releas
 
 ## Installation
 
-You can install READ from [PyPI] via pip:
+You can install READ from [PyPI](https://pypi.org/p/IMP-READ/) via pip:
 
 ```bash
 pip install imp-read
@@ -77,11 +77,12 @@ IsobaricAnalyzer -write_ini tmt18plex_default.ini
 ```
 
 Alternatively, you can use the `tmt18plex_default.ini` file in the `config/` directory. You might have to unblock the
-downloaded `tmt18plex_default.ini` file for usage with REID either via its _Properties_ (right-click) or 
+downloaded `tmt18plex_default.ini` file for usage with READ either via its _Properties_ (right-click) or 
 using [PowerShell](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file).
 
 ### Configuration
 
+An example READ config file is given in the `config/` directory.
 Please set the following parameters according to your needs in the `config.toml` file:
 
 ```toml
@@ -179,6 +180,10 @@ TODO
 You might also want to use the output of the Resolution GUI tool developed by Dina L. Bai, Tian Zhang _et al._ [\[1\]](https://doi.org/10.1038/s41467-025-60022-x) as additional input for better quality control. Please refer to this repository for instructions: [https://github.com/hgb-bin-proteomics/TMT_Resolution_GUI](https://github.com/hgb-bin-proteomics/TMT_Resolution_GUI).
 
 - [1] Keele, G.R., Dou, Y., Kodikara, S.P. et al. Expanding the landscape of aging via orbitrap astral mass spectrometry and tandem mass tag integration. Nat Commun 16, 4753 (2025). [https://doi.org/10.1038/s41467-025-60022-x](https://doi.org/10.1038/s41467-025-60022-x)
+
+## Use of Generative-AI/LLMs
+
+The READ logo was generated with [Lumo AI](https://proton.me/lumo). No Gen-AI/LLMs were used for anything else otherwise.
 
 ## Contact
 

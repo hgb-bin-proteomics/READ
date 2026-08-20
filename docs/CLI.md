@@ -8,7 +8,7 @@ You can find all scripts in the `/scripts` folder.
 > [!NOTE]
 >
 > Installing READ to your global environment will make all scripts globally available,
-> nevertheless we recommend using uv even though it requires copying the script to the
+> nevertheless we recommend using uv even though it requires copying the scripts to the
 > desired running location. However, this has the benefit that READ runs in an isolated
 > environment!
 
@@ -196,7 +196,7 @@ You can find all scripts in the `/scripts` folder.
     ```bash
     pip install imp-read
     ```
-  - Run the script with:
+  - Run READ with:
     ```bash
     tmt_diann -s SPECTRA.mzML -i report.parquet -c config.toml -t tmt18plex_default.ini
     ```
