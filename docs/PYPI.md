@@ -13,7 +13,8 @@ the TMT Resolution GUI Tool [\[1\]](https://doi.org/10.1038/s41467-025-60022-x).
 minimum reporter signal, and minimum reporter signal-to-noise. Filtering behavior is easily controlled via a human-readable `.toml` configuration file.
 
 **READ** can easily be installed via [PyPI](https://pypi.org/p/IMP-READ/) and run via the command line. We also provide executables with a graphical user interface for Microsoft Windows
-which can be downloaded [here](https://github.com/hgb-bin-proteomics/READ/releases). In-depth information on how to install and run **READ** can be found below.
+which can be downloaded [here](https://github.com/hgb-bin-proteomics/READ/releases). In-depth information on how to install and run **READ** can be found on
+[GitHub](https://github.com/hgb-bin-proteomics/READ/).
 
 ## Documentation
 
