@@ -127,10 +127,12 @@ def __annotate_diann_pgs(
             purity = float(psm["Co-Isolation Purity"])
             if pd.isna(purity):
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             purities.append(purity)
             if purity < min_purity:
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             if has_resolution:
                 for c in TMT.keys():
