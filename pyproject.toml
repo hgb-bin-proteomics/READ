@@ -43,12 +43,8 @@ gui = [
 [project.scripts]
 tmt_chimerys = "imp_read:tmt_chimerys"
 tmt_chimerys_dda = "imp_read:tmt_chimerys_dda"
-tmt_chimerys_dda_gui = "imp_read:tmt_chimerys_dda_gui"
-tmt_chimerys_gui = "imp_read:tmt_chimerys_gui"
 tmt_diann = "imp_read:tmt_diann"
-tmt_diann_gui = "imp_read:tmt_diann_gui"
 tmt_spectronaut = "imp_read:tmt_spectronaut"
-tmt_spectronaut_gui = "imp_read:tmt_spectronaut_gui"
 
 [project.urls]
 Homepage = "https://github.com/hgb-bin-proteomics/READ"
