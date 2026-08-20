@@ -27,9 +27,11 @@ from imp_read.tmt_spectronaut import __annotate_spectronaut_pgs
 from imp_read.tmt_spectronaut import __remove_ambiguous_pg
 
 CONFIG_FILE = "config.toml"
+INI_FILE = "tmt18plex_default.ini"
 RESOLUTION_FILE = "resolution.csv"
 WINDOW_FILE = None
 MAIN_REPORT = "report.csv"
+SPECTRONAUT_SEP = ";"
 # Verbose level where 0: ignore all warnings and errors, 1: raise warnings, and >= 2: raise errors
 VERBOSE = 1
 
@@ -61,7 +63,7 @@ def main():
         quantification_method = int(settings["quantification_method"])
         consensusXML_map = None
         if quantification_method != 1 and quantification_method != 3:
-            consensusXML_df = __get_consensusXML_df(args_spectra)
+            consensusXML_df = __get_consensusXML_df(args_spectra, INI_FILE)
             consensusXML_map = __get_consensusXML_map(consensusXML_df)
         df = __annotate_spectronaut_result(
             spectronaut_filename=MAIN_REPORT,
@@ -72,6 +74,7 @@ def main():
             resolution_gui_map=resolution_gui_map,
             window_file=WINDOW_FILE,
             verbose=VERBOSE,
+            spectronaut_sep=SPECTRONAUT_SEP,
         )
         df = __annotate_result_conditions(df, settings["conditions"])
         df = __annotate_spectronaut_pgs(df, settings)
@@ -80,6 +83,10 @@ def main():
         df.to_csv(
             f"{f}_purity_tmt_quant.csv",
             sep=",",
+            index=False,
+        )
+        df.to_parquet(
+            f"{f}_purity_tmt_quant.parquet",
             index=False,
         )
         # console log

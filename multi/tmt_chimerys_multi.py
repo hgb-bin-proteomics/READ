@@ -25,6 +25,7 @@ from imp_read.tmt_chimerys import __annotate_chimerys_protein_table
 from imp_read.tmt_chimerys import __annotate_result_conditions
 
 CONFIG_FILE = "config.toml"
+INI_FILE = "tmt18plex_default.ini"
 RESOLUTION_FILE = "resolution.csv"
 WINDOW_FILE = None
 
@@ -56,7 +57,7 @@ def main():
         quantification_method = int(settings["quantification_method"])
         consensusXML_map = None
         if quantification_method != 1 and quantification_method != 3:
-            consensusXML_df = __get_consensusXML_df(args_spectra)
+            consensusXML_df = __get_consensusXML_df(args_spectra, INI_FILE)
             consensusXML_map = __get_consensusXML_map(consensusXML_df)
         df = __annotate_chimerys_result(
             filename=f"{f}_PSMs.txt",
@@ -72,10 +73,18 @@ def main():
             sep="\t",
             index=False,
         )
+        df.to_parquet(
+            f"{f}_PSMs_purity_tmt_quant.parquet",
+            index=False,
+        )
         df = __annotate_result_conditions(df, settings["conditions"])
         df.to_csv(
             f"{f}_PSMs_purity_tmt_quant_conditions.txt",
             sep="\t",
+            index=False,
+        )
+        df.to_parquet(
+            f"{f}_PSMs_purity_tmt_quant_conditions.parquet",
             index=False,
         )
         proteins_df = __annotate_chimerys_protein_table(
@@ -84,6 +93,10 @@ def main():
         proteins_df.to_csv(
             f"{f}_Proteins_purity_tmt_quant.txt",
             sep="\t",
+            index=False,
+        )
+        proteins_df.to_parquet(
+            f"{f}_Proteins_purity_tmt_quant.parquet",
             index=False,
         )
         # console log
