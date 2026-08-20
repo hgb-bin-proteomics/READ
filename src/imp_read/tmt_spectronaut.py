@@ -42,8 +42,8 @@ from .tmt_chimerys import __get_sn_for_condition
 
 SPECTRONAUT_SEP = ";"
 
-__version = "2.1.0"
-__date = "2026-08-17"
+__version = "2.1.1"
+__date = "2026-08-20"
 
 
 def __remove_ambiguous_pg(protein_table: pd.DataFrame) -> pd.DataFrame:
