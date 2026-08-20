@@ -299,19 +299,23 @@ def __annotate_chimerys_protein_df(
                 or chimerys_coefficient < min_chimerys_coefficient
             ):
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             avg_reporter_sn = float(psm["Average Reporter S/N"])
             # remove PSMs with too low average reporter S/N
             if pd.isna(avg_reporter_sn) or avg_reporter_sn < min_avg_reporter_sn:
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             purity = float(psm["Co-Isolation Purity"])
             if pd.isna(purity):
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             purities.append(purity)
             if purity < min_purity:
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             if has_resolution:
                 for c in TMT.keys():
