@@ -42,8 +42,8 @@ from .tmt_chimerys import __get_sn_for_condition
 
 SPECTRONAUT_SEP = ";"
 
-__version = "2.1.0"
-__date = "2026-08-17"
+__version = "2.1.1"
+__date = "2026-08-20"
 
 
 def __remove_ambiguous_pg(protein_table: pd.DataFrame) -> pd.DataFrame:
@@ -143,10 +143,12 @@ def __annotate_spectronaut_pgs(
             purity = float(psm["Co-Isolation Purity"])
             if pd.isna(purity):
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             purities.append(purity)
             if purity < min_purity:
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             if has_resolution:
                 for c in TMT.keys():
@@ -653,7 +655,7 @@ def __annotate_spectronaut_result(
     return df
 
 
-def main(argv=None) -> pd.DataFrame:
+def _main(argv=None) -> pd.DataFrame:
     parser = argparse.ArgumentParser(
         prog="tmt_spectronaut.py",
         description="Calculates co-isolation purity for Spectronaut DIA TMT peptide matches and quantifies them.",
@@ -771,6 +773,12 @@ def main(argv=None) -> pd.DataFrame:
         index=False,
     )
     return df
+
+
+def main(argv=None) -> pd.DataFrame:
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=pd.errors.PerformanceWarning)
+        return _main(argv)
 
 
 if __name__ == "__main__":

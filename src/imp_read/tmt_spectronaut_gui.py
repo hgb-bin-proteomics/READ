@@ -5,6 +5,7 @@
 # https://github.com/michabirklbauer/
 # micha.birklbauer@gmail.com
 
+import warnings
 import pandas as pd
 
 try:
@@ -180,7 +181,9 @@ def main(argv=None) -> pd.DataFrame:
         print("Script finished successfully!")
         return df
 
-    return _main(argv)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=pd.errors.PerformanceWarning)
+        return _main(argv)
 
 
 if __name__ == "__main__":

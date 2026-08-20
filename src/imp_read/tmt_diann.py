@@ -6,6 +6,7 @@
 # micha.birklbauer@gmail.com
 
 import os
+import warnings
 import argparse
 import pandas as pd
 import numpy as np
@@ -35,8 +36,8 @@ from .tmt_chimerys import __get_sn_for_condition
 from .tmt_spectronaut import __read_spectra
 from .tmt_spectronaut import __get_ms2_spectrum
 
-__version = "2.1.0"
-__date = "2026-08-17"
+__version = "2.1.1"
+__date = "2026-08-20"
 
 
 def __remove_ambiguous_pg(protein_table: pd.DataFrame) -> pd.DataFrame:
@@ -127,10 +128,12 @@ def __annotate_diann_pgs(
             purity = float(psm["Co-Isolation Purity"])
             if pd.isna(purity):
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             purities.append(purity)
             if purity < min_purity:
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             if has_resolution:
                 for c in TMT.keys():
@@ -397,7 +400,7 @@ def __annotate_diann_result(
     return df
 
 
-def main(argv=None) -> pd.DataFrame:
+def _main(argv=None) -> pd.DataFrame:
     parser = argparse.ArgumentParser(
         prog="tmt_diann.py",
         description="Calculates co-isolation purity for DIA-NN DIA TMT peptide matches and quantifies them.",
@@ -501,6 +504,12 @@ def main(argv=None) -> pd.DataFrame:
         index=False,
     )
     return df
+
+
+def main(argv=None) -> pd.DataFrame:
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=pd.errors.PerformanceWarning)
+        return _main(argv)
 
 
 if __name__ == "__main__":

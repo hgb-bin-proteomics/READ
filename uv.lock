@@ -116,7 +116,7 @@ wheels = [
 
 [[package]]
 name = "imp-read"
-version = "2026.8.17"
+version = "2026.8.20"
 source = { editable = "." }
 dependencies = [
     { name = "numpy" },

@@ -25,8 +25,8 @@ from typing import Tuple
 from typing import Any
 
 
-__version = "2.2.0"
-__date = "2026-08-17"
+__version = "2.2.1"
+__date = "2026-08-20"
 
 TMT_TOLERANCE = 0.0025
 TMT = {
@@ -299,19 +299,23 @@ def __annotate_chimerys_protein_df(
                 or chimerys_coefficient < min_chimerys_coefficient
             ):
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             avg_reporter_sn = float(psm["Average Reporter S/N"])
             # remove PSMs with too low average reporter S/N
             if pd.isna(avg_reporter_sn) or avg_reporter_sn < min_avg_reporter_sn:
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             purity = float(psm["Co-Isolation Purity"])
             if pd.isna(purity):
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             purities.append(purity)
             if purity < min_purity:
                 protein_nr_psms_filtered += 1
+                protein_nr_psms_total += 1
                 continue
             if has_resolution:
                 for c in TMT.keys():
@@ -1217,7 +1221,7 @@ def __annotate_chimerys_result(
     return df
 
 
-def main(argv=None) -> pd.DataFrame:
+def _main(argv=None) -> pd.DataFrame:
     parser = argparse.ArgumentParser(
         prog="tmt_chimerys.py",
         description="Calculates co-isolation purity for Chimerys DIA TMT PSMs and optionally quantifies them.",
@@ -1343,6 +1347,12 @@ def main(argv=None) -> pd.DataFrame:
             index=False,
         )
     return df
+
+
+def main(argv=None) -> pd.DataFrame:
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=pd.errors.PerformanceWarning)
+        return _main(argv)
 
 
 if __name__ == "__main__":

@@ -34,8 +34,8 @@ from .tmt_chimerys import __annotate_result_conditions
 from .tmt_chimerys import __annotate_chimerys_protein_table
 from .tmt_chimerys import __convert
 
-__version = "2.2.0"
-__date = "2026-08-17"
+__version = "2.2.1"
+__date = "2026-08-20"
 
 ISOTOPE = 1.00335
 STRATEGY = 1
@@ -349,7 +349,7 @@ def __annotate_chimerys_result(
     return df
 
 
-def main(argv=None) -> pd.DataFrame:
+def _main(argv=None) -> pd.DataFrame:
     parser = argparse.ArgumentParser(
         prog="tmt_chimerys_dda.py",
         description="Calculates co-isolation purity for Chimerys DDA TMT PSMs and optionally quantifies them.",
@@ -464,6 +464,12 @@ def main(argv=None) -> pd.DataFrame:
             index=False,
         )
     return df
+
+
+def main(argv=None) -> pd.DataFrame:
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=pd.errors.PerformanceWarning)
+        return _main(argv)
 
 
 if __name__ == "__main__":
