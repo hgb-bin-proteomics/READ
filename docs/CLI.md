@@ -1,14 +1,16 @@
-# Commandline Interface
+# Command Line Interface
 
-You can run the following scripts from the commandline using [python](https://www.python.org/downloads/)
+You can run the READ from the command line using [python](https://www.python.org/downloads/)
 or [uv](https://docs.astral.sh/uv/).
 
 You can find all scripts in the `/scripts` folder.
 
-> [!IMPORTANT]
+> [!NOTE]
 >
-> Please make sure that `tmt_chimerys.py`, `tmt_chimerys_dda.py`, `tmt_diann.py`, `tmt_spectronaut.py`,
-> and `tmt18plex_default.ini` are in the same directory when running them as python scripts!
+> Installing READ to your global environment will make all scripts globally available,
+> nevertheless we recommend using uv even though it requires copying the script to the
+> desired running location. However, this has the benefit that READ runs in an isolated
+> environment!
 
 ## Chimerys DIA
 
@@ -32,41 +34,33 @@ You can find all scripts in the `/scripts` folder.
     ```
   - Run the script with:
     ```bash
-    uv run tmt_chimerys.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml
+    uv run tmt_chimerys.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini
     ```
   - _or_ if you also have proteins with:
     ```bash
-    uv run tmt_chimerys.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -p PROTEOME_DISCOVERER_Proteins.txt
+    uv run tmt_chimerys.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini -p PROTEOME_DISCOVERER_Proteins.txt
     ```
   - To display all possible parameters run:
     ```bash
     uv run tmt_chimerys.py --help
     ```
-  - Alternatively you can also run the script with a graphical user interface using:
-    ```bash
-    uv run tmt_chimerys_gui.py
-    ```
 - **Option B: Running via native python.**
-  - Install python 3.12 or greater from [here](https://www.python.org/downloads/).
-  - Install requirements with:
+  - Install python 3.12 or 3.13 from [here](https://www.python.org/downloads/).
+  - Install READ with:
     ```bash
-    pip install -r requirements.txt
+    pip install imp-read
     ```
-  - Run the script with:
+  - Run READ with:
     ```bash
-    python tmt_chimerys.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml
+    tmt_chimerys -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini
     ```
   - _or_ if you also have proteins with:
     ```bash
-    python tmt_chimerys.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -p PROTEOME_DISCOVERER_Proteins.txt
+    tmt_chimerys -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini -p PROTEOME_DISCOVERER_Proteins.txt
     ```
   - To display all possible parameters run:
     ```bash
-    python tmt_chimerys.py --help
-    ```
-  - Alternatively you can also run the script with a graphical user interface using:
-    ```bash
-    python tmt_chimerys_gui.py
+    tmt_chimerys --help
     ```
 - The result will be new files with name extension `_purity_tmt_quant` that are written out,
   containing purity and quantification values.
@@ -93,41 +87,33 @@ You can find all scripts in the `/scripts` folder.
     ```
   - Run the script with:
     ```bash
-    uv run tmt_chimerys_dda.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml
+    uv run tmt_chimerys_dda.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini
     ```
   - _or_ if you also have proteins with:
     ```bash
-    uv run tmt_chimerys_dda.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -p PROTEOME_DISCOVERER_Proteins.txt
+    uv run tmt_chimerys_dda.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini -p PROTEOME_DISCOVERER_Proteins.txt
     ```
   - To display all possible parameters run:
     ```bash
     uv run tmt_chimerys_dda.py --help
     ```
-  - Alternatively you can also run the script with a graphical user interface using:
-    ```bash
-    uv run tmt_chimerys_dda_gui.py
-    ```
 - **Option B: Running via native python.**
-  - Install python 3.12 or greater from [here](https://www.python.org/downloads/).
-  - Install requirements with:
+  - Install python 3.12 or 3.13 from [here](https://www.python.org/downloads/).
+  - Install READ with:
     ```bash
-    pip install -r requirements.txt
+    pip install imp-read
     ```
-  - Run the script with:
+  - Run READ with:
     ```bash
-    python tmt_chimerys_dda.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml
+    tmt_chimerys_dday -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini
     ```
   - _or_ if you also have proteins with:
     ```bash
-    python tmt_chimerys_dda.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -p PROTEOME_DISCOVERER_Proteins.txt
+    tmt_chimerys_dda -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini -p PROTEOME_DISCOVERER_Proteins.txt
     ```
   - To display all possible parameters run:
     ```bash
-    python tmt_chimerys_dda.py --help
-    ```
-  - Alternatively you can also run the script with a graphical user interface using:
-    ```bash
-    python tmt_chimerys_dda_gui.py
+    tmt_chimerys_dda --help
     ```
 - The result will be new files with name extension `_purity_tmt_quant` that are written out,
   containing purity and quantification values.
@@ -135,7 +121,7 @@ You can find all scripts in the `/scripts` folder.
 ## Spectronaut
 
 - Export matched precursors/the main report from Spectronaut in **semicolon-separated** `.csv` format.
-  - If your result file is comma-separated you need to change to `SPECTRONAUT_SEP = ","` in `tmt_spectronaut.py`.
+  - If your result file is comma-separated you need to pass `-d ","` to the script.
 - Set you desired parameters in `config.toml`.
 - The scripts support both `.raw` files and `.mzML` files as input, `.raw` files will be automatically
   converted to `.mzML` when the scripts are run.
@@ -154,33 +140,25 @@ You can find all scripts in the `/scripts` folder.
     ```
   - Run the script with:
     ```bash
-    uv run tmt_spectronaut.py -s SPECTRA.mzML -i report.csv -c config.toml
+    uv run tmt_spectronaut.py -s SPECTRA.mzML -i report.csv -c config.toml -t tmt18plex_default.ini
     ```
   - To display all possible parameters run:
     ```bash
     uv run tmt_spectronaut.py --help
     ```
-  - Alternatively you can also run the script with a graphical user interface using:
-    ```bash
-    uv run tmt_spectronaut_gui.py
-    ```
 - **Option B: Running via native python.**
-  - Install python 3.12 or greater from [here](https://www.python.org/downloads/).
-  - Install requirements with:
+  - Install python 3.12 or 3.13 from [here](https://www.python.org/downloads/).
+  - Install READ with:
     ```bash
-    pip install -r requirements.txt
+    pip install imp-read
     ```
-  - Run the script with:
+  - Run READ with:
     ```bash
-    python tmt_spectronaut.py -s SPECTRA.mzML -i report.csv -c config.toml
+    tmt_spectronaut -s SPECTRA.mzML -i report.csv -c config.toml -t tmt18plex_default.ini
     ```
   - To display all possible parameters run:
     ```bash
-    python tmt_spectronaut.py --help
-    ```
-  - Alternatively you can also run the script with a graphical user interface using:
-    ```bash
-    python tmt_spectronaut_gui.py
+    tmt_spectronaut --help
     ```
 - The result will be new files with name extension `_purity_tmt_quant` that are written out,
   containing purity and quantification values.
@@ -206,33 +184,25 @@ You can find all scripts in the `/scripts` folder.
     ```
   - Run the script with:
     ```bash
-    uv run tmt_diann.py -s SPECTRA.mzML -i report.parquet -c config.toml
+    uv run tmt_diann.py -s SPECTRA.mzML -i report.parquet -c config.toml -t tmt18plex_default.ini
     ```
   - To display all possible parameters run:
     ```bash
     uv run tmt_diann.py --help
     ```
-  - Alternatively you can also run the script with a graphical user interface using:
-    ```bash
-    uv run tmt_diann_gui.py
-    ```
 - **Option B: Running via native python.**
-  - Install python 3.12 or greater from [here](https://www.python.org/downloads/).
-  - Install requirements with:
+  - Install python 3.12 or 3.13 from [here](https://www.python.org/downloads/).
+  - Install READ with:
     ```bash
-    pip install -r requirements.txt
+    pip install imp-read
     ```
   - Run the script with:
     ```bash
-    python tmt_diann.py -s SPECTRA.mzML -i report.parquet -c config.toml
+    tmt_diann -s SPECTRA.mzML -i report.parquet -c config.toml -t tmt18plex_default.ini
     ```
   - To display all possible parameters run:
     ```bash
-    python tmt_diann.py --help
-    ```
-  - Alternatively you can also run the script with a graphical user interface using:
-    ```bash
-    python tmt_diann_gui.py
+    tmt_diann --help
     ```
 - The result will be new files with name extension `_purity_tmt_quant` that are written out,
   containing purity and quantification values.
