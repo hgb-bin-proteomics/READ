@@ -6,6 +6,7 @@
 # micha.birklbauer@gmail.com
 
 import os
+import warnings
 import argparse
 import pandas as pd
 import numpy as np
@@ -399,7 +400,7 @@ def __annotate_diann_result(
     return df
 
 
-def main(argv=None) -> pd.DataFrame:
+def _main(argv=None) -> pd.DataFrame:
     parser = argparse.ArgumentParser(
         prog="tmt_diann.py",
         description="Calculates co-isolation purity for DIA-NN DIA TMT peptide matches and quantifies them.",
@@ -503,6 +504,12 @@ def main(argv=None) -> pd.DataFrame:
         index=False,
     )
     return df
+
+
+def main(argv=None) -> pd.DataFrame:
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=pd.errors.PerformanceWarning)
+        return _main(argv)
 
 
 if __name__ == "__main__":
