@@ -14,20 +14,41 @@ identified precursors to their corresponding MS1 and MS2 spectra, and then quant
 the TMT Resolution GUI Tool [\[1\]](https://doi.org/10.1038/s41467-025-60022-x) (see also below). Quantification is additionally quality controlled by optionally several filters including precursor co-isolation purity, reporter ion resolution,
 minimum reporter signal, and minimum reporter signal-to-noise. Filtering behavior is easily controlled via a human-readable `.toml` configuration file.
 
-**READ** can easily be installed via [PyPI](https://pypi.org/p/IMP-READ/) and run via the commandline. We also provide executables with a graphical user interface for Microsoft Windows
-at [this repository](https://github.com/hgb-bin-proteomics/READ-GUI). In-depth information on how to install and run **READ** can be found below.
+**READ** can easily be installed via [PyPI](https://pypi.org/p/IMP-READ/) and run via the command line. We also provide executables with a graphical user interface for Microsoft Windows
+which can be downloaded [here](https://github.com/hgb-bin-proteomics/READ/releases). In-depth information on how to install and run **READ** can be found below.
 
 ## Requirements
 
 - Please install [OpenMS](https://openms.readthedocs.io/en/latest/about/installation.html).
   - We recommend and tested using OpenMS version [3.4.0](https://abibuilder.cs.uni-tuebingen.de/archive/openms/OpenMSInstaller/release/3.4.0/)!
-- If you want to run the python scripts, you need to install [python 3.12 or higher](https://www.python.org/downloads/)
-  or [uv](https://docs.astral.sh/uv/).
+- If you want to run READ via the command line/python, you need to install [python 3.12 or 3.13](https://www.python.org/downloads/)
+  or [uv](https://docs.astral.sh/uv/) (recommended).
+- We recommend at least 16GB of memory for running READ!
+
+> [!IMPORTANT]
+>
+> We generally recommend using [uv](https://docs.astral.sh/uv/) for running READ!
+
+## Installation
+
+You can install READ from [PyPI] via pip:
+
+```bash
+pip install imp-read
+```
+
+Or into your uv project via:
+
+```bash
+uv add imp-read
+```
+
+Installation should not take longer than a few seconds!
 
 ## Usage
 
-- On Microsoft Windows the applications can be run as standalone executables or as python scripts.
-- Other operating systems are limited to the python scripts, please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md).
+- On Microsoft Windows READ can be run as a standalone executable or via python.
+- Other operating systems are limited to python, please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md).
 
 ### Graphical User Interface
 
@@ -36,11 +57,7 @@ at [this repository](https://github.com/hgb-bin-proteomics/READ-GUI). In-depth i
 We provide compiled binaries for Microsoft Windows that offer a graphical user interface. Please download the executables from
 [releases](https://github.com/hgb-bin-proteomics/READ/releases).
 
-> [!IMPORTANT]
->
-> Please make sure that the executable and the `tmt18plex_default.ini` file are in the same directory!
-> You might also have to unblock the `tmt18plex_default.ini` file either via its _Properties_ (right-click) or
-> using [PowerShell](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file).
+The source code for the built executables is available at [this repository](https://github.com/hgb-bin-proteomics/READ-GUI).
 
 ### Commandline Interface
 
@@ -50,6 +67,18 @@ Please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/
 
 If you want to run the scripts for multiple input files sequentially, please
 refer to [MULTI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/MULTI.md).
+
+### Usage with OpenMS
+
+To use OpenMS quantification you will need a dedicated configuration file that can be generated via:
+
+```bash
+IsobaricAnalyzer -write_ini tmt18plex_default.ini
+```
+
+Alternatively, you can use the `tmt18plex_default.ini` file in the `config/` directory. You might have to unblock the
+downloaded `tmt18plex_default.ini` file for usage with REID either via its _Properties_ (right-click) or 
+using [PowerShell](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file).
 
 ### Configuration
 
@@ -144,6 +173,8 @@ s_thresholds = { all = 0.0, cond1 = 0.0, cond2 = 0.0 }
 ## TMT Resolution GUI Tool
 
 You might also want to use the output of the Resolution GUI tool developed by Dina L. Bai, Tian Zhang _et al._ [\[1\]](https://doi.org/10.1038/s41467-025-60022-x) as additional input for better quality control. Please refer to this repository for instructions: [https://github.com/hgb-bin-proteomics/TMT_Resolution_GUI](https://github.com/hgb-bin-proteomics/TMT_Resolution_GUI).
+
+- [1] Keele, G.R., Dou, Y., Kodikara, S.P. et al. Expanding the landscape of aging via orbitrap astral mass spectrometry and tandem mass tag integration. Nat Commun 16, 4753 (2025). [https://doi.org/10.1038/s41467-025-60022-x](https://doi.org/10.1038/s41467-025-60022-x)
 
 ## Contact
 
