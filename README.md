@@ -59,7 +59,7 @@ We provide compiled binaries for Microsoft Windows that offer a graphical user i
 
 The source code for the built executables is available at [this repository](https://github.com/hgb-bin-proteomics/READ-GUI).
 
-### Commandline Interface
+### Command Line Interface
 
 Please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md).
 
