@@ -1,14 +1,13 @@
 # Running the Scripts for Multiple Files
 
-If you want to run the scripts for multiple input files sequentially, please
+If you want to run READ for multiple input files sequentially, please
 install the requirements and follow the steps below.
 
 ## Requirements
 
 - Please install [OpenMS](https://openms.readthedocs.io/en/latest/about/installation.html).
   - We recommend and tested using OpenMS version [3.4.0](https://abibuilder.cs.uni-tuebingen.de/archive/openms/OpenMSInstaller/release/3.4.0/)!
-- Please install either [python 3.12 or higher](https://www.python.org/downloads/)
-  or [uv](https://docs.astral.sh/uv/).
+- Please install [uv](https://docs.astral.sh/uv/).
 
 ## Chimerys: Steps
 
@@ -36,8 +35,6 @@ install the requirements and follow the steps below.
   - You also have to set the filename in the `tmt_chimerys_multi.py` script under `WINDOW_FILE`.
   - You can ignore this for DDA results.
 - Lastly, please put the following scripts into the folder:
-  - `scripts/tmt_chimerys.py`
-  - `scripts/tmt_chimerys_dda.py`
   - `multi/tmt_chimerys_multi.py`
   - `multi/tmt_chimerys_dda_multi.py`
 - Your `tmt_files` folder structure should now be something like this:
@@ -50,38 +47,21 @@ install the requirements and follow the steps below.
   - `config.toml`
   - `tmt18plex_default.ini`
   - `Mass List Table.csv` _(optional)_
-  - `tmt_chimerys.py`
-  - `tmt_chimerys_dda.py`
   - `tmt_chimerys_multi.py`
   - `tmt_chimerys_dda_multi.py`
 - Open a terminal in this folder.
-- **Option A (recommended): Running via [uv](https://docs.astral.sh/uv/).**
-  - [Install uv](https://docs.astral.sh/uv/getting-started/installation/) if it's not already installed on your system, e.g.:
-    ```bash
-    pip install uv
-    ```
-  - Run the DIA script with:
-    ```bash
-    uv run tmt_chimerys_multi.py
-    ```
-  - _or_ run the DDA script with:
-    ```bash
-    uv run tmt_chimerys_dda_multi.py
-    ```
-- **Option B: Running via native python.**
-  - Install python 3.12 or greater from [here](https://www.python.org/downloads/).
-  - Install requirements from the `requirements.txt` file in the root directory with:
-    ```bash
-    pip install -r requirements.txt
-    ```
-  - Run the DIA script with:
-    ```bash
-    python tmt_chimerys_multi.py
-    ```
-  - _or_ run the DDA script with:
-    ```bash
-    python tmt_chimerys_dda_multi.py
-    ```
+- [Install uv](https://docs.astral.sh/uv/getting-started/installation/) if it's not already installed on your system, e.g.:
+  ```bash
+  pip install uv
+  ```
+- Run the DIA script with:
+  ```bash
+  uv run tmt_chimerys_multi.py
+  ```
+- _or_ run the DDA script with:
+  ```bash
+  uv run tmt_chimerys_dda_multi.py
+  ```
 
 > [!IMPORTANT]
 >
@@ -117,9 +97,6 @@ install the requirements and follow the steps below.
   - You also have to set the filename in the `tmt_chimerys_multi.py` script under `WINDOW_FILE`.
   - You can ignore this for DDA results.
 - Lastly, please put the following scripts into the folder:
-  - `scripts/tmt_chimerys.py`
-  - `scripts/tmt_spectronaut.py`
-  - `scripts/tmt_diann.py`
   - `multi/tmt_diann_multi.py`
 - Your `tmt_files` folder structure should now be something like this:
   - `20250519_Astral1_Evo_TH070_TT_THIDmulti003_pool_DIA_mz0c5_3ng_1.raw`
@@ -130,30 +107,16 @@ install the requirements and follow the steps below.
   - `config.toml`
   - `tmt18plex_default.ini`
   - `Mass List Table.csv` _(optional)_
-  - `tmt_chimerys.py`
-  - `tmt_spectronaut.py`
-  - `tmt_diann.py`
   - `tmt_diann_multi.py`
 - Open a terminal in this folder.
-- **Option A (recommended): Running via [uv](https://docs.astral.sh/uv/).**
-  - [Install uv](https://docs.astral.sh/uv/getting-started/installation/) if it's not already installed on your system, e.g.:
-    ```bash
-    pip install uv
-    ```
-  - Run the DIA-NN script with:
-    ```bash
-    uv run tmt_diann_multi.py
-    ```
-- **Option B: Running via native python.**
-  - Install python 3.12 or greater from [here](https://www.python.org/downloads/).
-  - Install requirements from the `requirements.txt` file in the root directory with:
-    ```bash
-    pip install -r requirements.txt
-    ```
-  - Run the DIA-NN script with:
-    ```bash
-    python tmt_diann_multi.py
-    ```
+- [Install uv](https://docs.astral.sh/uv/getting-started/installation/) if it's not already installed on your system, e.g.:
+  ```bash
+  pip install uv
+  ```
+- Run the DIA-NN script with:
+  ```bash
+  uv run tmt_diann_multi.py
+  ```
 
 > [!IMPORTANT]
 >
@@ -189,8 +152,6 @@ install the requirements and follow the steps below.
   - You also have to set the filename in the `tmt_chimerys_multi.py` script under `WINDOW_FILE`.
   - You can ignore this for DDA results.
 - Lastly, please put the following scripts into the folder:
-  - `scripts/tmt_chimerys.py`
-  - `scripts/tmt_spectronaut.py`
   - `multi/tmt_spectronaut_multi.py`
 - Your `tmt_files` folder structure should now be something like this:
   - `20250519_Astral1_Evo_TH070_TT_THIDmulti003_pool_DIA_mz0c5_3ng_1.raw`
@@ -201,29 +162,16 @@ install the requirements and follow the steps below.
   - `config.toml`
   - `tmt18plex_default.ini`
   - `Mass List Table.csv` _(optional)_
-  - `tmt_chimerys.py`
-  - `tmt_spectronaut.py`
   - `tmt_spectronaut_multi.py`
 - Open a terminal in this folder.
-- **Option A (recommended): Running via [uv](https://docs.astral.sh/uv/).**
-  - [Install uv](https://docs.astral.sh/uv/getting-started/installation/) if it's not already installed on your system, e.g.:
-    ```bash
-    pip install uv
-    ```
-  - Run the Spectronaut script with:
-    ```bash
-    uv run tmt_spectronaut_multi.py
-    ```
-- **Option B: Running via native python.**
-  - Install python 3.12 or greater from [here](https://www.python.org/downloads/).
-  - Install requirements from the `requirements.txt` file in the root directory with:
-    ```bash
-    pip install -r requirements.txt
-    ```
-  - Run the Spectronaut script with:
-    ```bash
-    python tmt_spectronaut_multi.py
-    ```
+- [Install uv](https://docs.astral.sh/uv/getting-started/installation/) if it's not already installed on your system, e.g.:
+  ```bash
+  pip install uv
+  ```
+- Run the Spectronaut script with:
+  ```bash
+  uv run tmt_spectronaut_multi.py
+  ```
 
 > [!IMPORTANT]
 >
