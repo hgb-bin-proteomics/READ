@@ -27,6 +27,7 @@ from imp_read.tmt_diann import __annotate_diann_pgs
 from imp_read.tmt_diann import __remove_ambiguous_pg
 
 CONFIG_FILE = "config.toml"
+INI_FILE = "tmt18plex_default.ini"
 RESOLUTION_FILE = "resolution.csv"
 WINDOW_FILE = None
 MAIN_REPORT = "report.parquet"
@@ -61,7 +62,7 @@ def main():
         quantification_method = int(settings["quantification_method"])
         consensusXML_map = None
         if quantification_method != 1 and quantification_method != 3:
-            consensusXML_df = __get_consensusXML_df(args_spectra)
+            consensusXML_df = __get_consensusXML_df(args_spectra, INI_FILE)
             consensusXML_map = __get_consensusXML_map(consensusXML_df)
         df = __annotate_diann_result(
             diann_filename=MAIN_REPORT,
