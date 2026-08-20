@@ -1,7 +1,9 @@
 # READ
 _\[R\]eporter Ion \[E\]xtractor and \[A\]nnotation \[D\]irector_
 
-**READ:** A tool and python package to orchestrate
+<img src="https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo.png" class="dark-light" align="left" width="200px" style="padding: 5px 20px 10px 20px;"/>
+
+**READ** is a python-based tool and to orchestrate
 TMTpro-18plex quantification for \[single cell\] DIA and DDA searches with
 [Chimerys](https://www.msaid.de/chimerys),
 [Spectronaut](https://biognosys.com/software/spectronaut/), and

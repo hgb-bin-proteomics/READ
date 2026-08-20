@@ -35,11 +35,6 @@ dependencies = [
     "tqdm>=4.67.1",
 ]
 
-[project.optional-dependencies]
-gui = [
-    "gooey>=1.0.8.1",
-]
-
 [project.scripts]
 tmt_chimerys = "imp_read:tmt_chimerys"
 tmt_chimerys_dda = "imp_read:tmt_chimerys_dda"
