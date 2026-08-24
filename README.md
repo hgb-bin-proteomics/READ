@@ -77,7 +77,7 @@ IsobaricAnalyzer -write_ini tmt18plex_default.ini
 ```
 
 Alternatively, you can use the `tmt18plex_default.ini` file in the `config/` directory. You might have to unblock the
-downloaded `tmt18plex_default.ini` file for usage with READ either via its _Properties_ (right-click) or 
+downloaded `tmt18plex_default.ini` file for usage with READ either via its _Properties_ (right-click) or
 using [PowerShell](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file).
 
 ### Configuration
@@ -170,6 +170,11 @@ s_thresholds = { all = 0.0, cond1 = 0.0, cond2 = 0.0 }
 >
 > You might also want to adapt the isotope correction factors for your TMT lot, you can do that in the `tmt18plex_default.ini` file.
 > Please refer to the documentation site of OpenMS [here](https://openms.de/documentation/html/TOPP_IsobaricAnalyzer.html).
+
+## Output
+
+Please refer to [OUTPUT.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/OUTPUT.md) for expected result/output
+files created by READ.
 
 ## Example Data and Usage
 

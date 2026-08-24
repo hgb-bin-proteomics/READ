@@ -64,6 +64,8 @@ You can find all scripts in the `/scripts` folder.
     ```
 - The result will be new files with name extension `_purity_tmt_quant` that are written out,
   containing purity and quantification values.
+- Please refer to [OUTPUT.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/OUTPUT.md) for a description of the new
+  columns in the output file(s).
 
 ## Chimerys DDA
 
@@ -117,6 +119,8 @@ You can find all scripts in the `/scripts` folder.
     ```
 - The result will be new files with name extension `_purity_tmt_quant` that are written out,
   containing purity and quantification values.
+- Please refer to [OUTPUT.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/OUTPUT.md) for a description of the new
+  columns in the output file(s).
 
 ## Spectronaut
 
@@ -162,6 +166,8 @@ You can find all scripts in the `/scripts` folder.
     ```
 - The result will be new files with name extension `_purity_tmt_quant` that are written out,
   containing purity and quantification values.
+- Please refer to [OUTPUT.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/OUTPUT.md) for a description of the new
+  columns in the output file(s).
 
 ## DIA-NN
 
@@ -206,3 +212,5 @@ You can find all scripts in the `/scripts` folder.
     ```
 - The result will be new files with name extension `_purity_tmt_quant` that are written out,
   containing purity and quantification values.
+- Please refer to [OUTPUT.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/OUTPUT.md) for a description of the new
+  columns in the output file(s).
