@@ -213,7 +213,7 @@ is **NOT** provided.
 
 Quantification:
 - `Annotated {reporter}`:
-  - PSM-level reporter quantification (noise subtracted if specified).
+  - PSM-level reporter quantification.
 
 PSM statistics:
 - `Co-Isolation Purity`:
