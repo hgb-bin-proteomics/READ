@@ -106,7 +106,7 @@ is provided.
 
 *****
 
-### READ for Chimerys DIA
+### READ for Chimerys DIA & READ for Chimerys DDA
 
 #### PSM Table
 
@@ -207,7 +207,7 @@ is **NOT** provided.
 
 *****
 
-### READ for Chimerys DIA
+### READ for Chimerys DIA & READ for Chimerys DDA
 
 #### PSM Table
 
