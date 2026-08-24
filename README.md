@@ -49,6 +49,7 @@ Installation should not take longer than a few seconds!
 
 - On Microsoft Windows READ can be run as a standalone executable or via python.
 - Other operating systems are limited to python, please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md).
+- Runtime per RAW file is usually between 15-30 minutes.
 
 ### Graphical User Interface
 
