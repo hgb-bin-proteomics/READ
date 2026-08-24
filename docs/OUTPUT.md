@@ -104,6 +104,8 @@ TIC
 The following output will be produced by READ if a resolution file from the Resolution GUI Tool
 is provided.
 
+*****
+
 ### READ for Chimerys DIA
 
 #### PSM Table
@@ -202,6 +204,8 @@ PSM/Precursor statistics per protein:
 
 The following output will be produced by READ if a resolution file from the Resolution GUI Tool
 is **NOT** provided.
+
+*****
 
 ### READ for Chimerys DIA
 
