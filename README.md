@@ -1,7 +1,7 @@
 # READ
 _\[R\]eporter Ion \[E\]xtractor and \[A\]nnotation \[D\]irector_
 
-<img src="https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo_padded.png" class="dark-light" align="left" width="200px" style="padding: 5px 20px 10px 20px;"/>
+<img src="https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo/logo_padded.png" class="dark-light" align="left" width="200px" style="padding: 5px 20px 10px 20px;"/>
 
 **READ** is a python-based tool to orchestrate
 TMTpro-18plex quantification for \[single cell\] DIA and DDA searches with
@@ -49,10 +49,11 @@ Installation should not take longer than a few seconds!
 
 - On Microsoft Windows READ can be run as a standalone executable or via python.
 - Other operating systems are limited to python, please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md).
+- Runtime per RAW file is usually between 15-30 minutes.
 
 ### Graphical User Interface
 
-![GUI screenshot](https://github.com/hgb-bin-proteomics/READ/raw/master/docs/gui.png)
+![GUI screenshot](https://github.com/hgb-bin-proteomics/READ/raw/master/docs/img/gui.png)
 
 We provide compiled binaries for Microsoft Windows that offer a graphical user interface. Please download the executables from
 [releases](https://github.com/hgb-bin-proteomics/READ/releases).
@@ -77,7 +78,7 @@ IsobaricAnalyzer -write_ini tmt18plex_default.ini
 ```
 
 Alternatively, you can use the `tmt18plex_default.ini` file in the `config/` directory. You might have to unblock the
-downloaded `tmt18plex_default.ini` file for usage with READ either via its _Properties_ (right-click) or 
+downloaded `tmt18plex_default.ini` file for usage with READ either via its _Properties_ (right-click) or
 using [PowerShell](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file).
 
 ### Configuration
@@ -170,6 +171,11 @@ s_thresholds = { all = 0.0, cond1 = 0.0, cond2 = 0.0 }
 >
 > You might also want to adapt the isotope correction factors for your TMT lot, you can do that in the `tmt18plex_default.ini` file.
 > Please refer to the documentation site of OpenMS [here](https://openms.de/documentation/html/TOPP_IsobaricAnalyzer.html).
+
+## Output
+
+Please refer to [OUTPUT.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/OUTPUT.md) for expected result/output
+files created by READ.
 
 ## Example Data and Usage
 
