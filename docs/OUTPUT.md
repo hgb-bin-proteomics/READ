@@ -6,10 +6,11 @@ supply a resolution file from the Resolution GUI Tool or not.
 
 Below you can find a breakdown of all version and input combinations.
 
-Please note, that columns containing a `{reporter}` placeholder exist once for every reporter
+Please note that columns containing a `{reporter}` placeholder exist once for every reporter
 (so in total 18-times) with reporters being:
 
 <details><summary>Expand to show reporter labels!</summary>
+
 ```text
 TMTpro-126
 TMTpro-127N
@@ -30,13 +31,72 @@ TMTpro-134N
 TMTpro-134C
 TMTpro-135N
 ```
+
 </details>
 
 The Resolution GUI Tool output columns are:
 
 <details><summary>Expand to show column names!</summary>
+
 ```text
+Resolution
+TIC
+126 Resolution
+126 Intensity
+126 Noise
+127N Resolution
+127N Intensity
+127N Noise
+127C Resolution
+127C Intensity
+127C Noise
+128N Resolution
+128N Intensity
+128N Noise
+128C Resolution
+128C Intensity
+128C Noise
+129N Resolution
+129N Intensity
+129N Noise
+129C Resolution
+129C Intensity
+129C Noise
+130N Resolution
+130N Intensity
+130N Noise
+130C Resolution
+130C Intensity
+130C Noise
+131N Resolution
+131N Intensity
+131N Noise
+131C Resolution
+131C Intensity
+131C Noise
+132N Resolution
+132N Intensity
+132N Noise
+132C Resolution
+132C Intensity
+132C Noise
+133N Resolution
+133N Intensity
+133N Noise
+133C Resolution
+133C Intensity
+133C Noise
+134N Resolution
+134N Intensity
+134N Noise
+134C Resolution
+134C Intesntiy
+134C Noise
+135N Resolution
+135N Intensity
+135N Noise
 ```
+
 </details>
 
 ## + Resolution GUI Tool Output
