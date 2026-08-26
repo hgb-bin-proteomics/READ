@@ -23,6 +23,8 @@ which can be downloaded [here](https://github.com/hgb-bin-proteomics/READ/releas
   - We recommend and tested using OpenMS version [3.4.0](https://abibuilder.cs.uni-tuebingen.de/archive/openms/OpenMSInstaller/release/3.4.0/)!
 - If you want to run READ via the command line/python, you need to install [python 3.12 or 3.13](https://www.python.org/downloads/)
   or [uv](https://docs.astral.sh/uv/) (recommended).
+- READ was tested with result files from Cimerys v4.7.0 (Proteome Discoverer 3.2), DIA-NN v2.2.0, and Spectronaut v20.1.250624.92449 but should also
+  work with result files from newer software versions.
 - We recommend at least 16GB of memory for running READ!
 
 > [!IMPORTANT]
