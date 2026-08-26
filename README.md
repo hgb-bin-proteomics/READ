@@ -39,7 +39,7 @@ You can install READ from [PyPI](https://pypi.org/p/IMP-READ/) via pip:
 pip install imp-read
 ```
 
-Or into your uv project via:
+Or into your [uv](https://docs.astral.sh/uv/) project via:
 
 ```bash
 uv add imp-read
