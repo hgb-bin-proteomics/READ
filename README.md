@@ -27,6 +27,8 @@ which can be downloaded [here](https://github.com/hgb-bin-proteomics/READ/releas
 - READ was tested with result files from Cimerys `v4.7.0 (Proteome Discoverer 3.2)`, DIA-NN `v2.2.0`, and Spectronaut
   `v20.1.250624.92449` but should also
   work with result files from newer software versions.
+- READ supports Thermo RAW files as input on Microsoft Windows-based systems, on other operating systems
+  please convert your RAW files to `.mzML` format first!
 - We recommend at least 16GB of memory for running READ!
 
 > [!IMPORTANT]
