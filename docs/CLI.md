@@ -6,7 +6,7 @@ or [uv](https://docs.astral.sh/uv/).
 > [!IMPORTANT]
 >
 > Please note that RAW file input is only supported on Microsoft Windows-based systems!
-> If you use another OS please convert your RAW files to .mzML beforehand!
+> If you use another OS please convert your RAW files to `.mzML` beforehand!
 
 ## Chimerys DIA
 
@@ -124,7 +124,7 @@ or [uv](https://docs.astral.sh/uv/).
   - If your result file is comma-separated you need to pass `-d ","` to READ.
 - Set you desired parameters in `config.toml`.
 - READ supports both `.raw` files and `.mzML` files as input, `.raw` files will be automatically
-  converted to `.mzML` when the scripts are run.
+  converted to `.mzML` when READ is run.
 - The following steps are optional if you want to convert your `.raw` files manually:
   - Download ThermoRawFileParser from [here](https://github.com/CompOmics/ThermoRawFileParser/releases/tag/v1.4.5)
   - Convert your RAW file with:
