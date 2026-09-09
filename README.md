@@ -57,6 +57,14 @@ Installation should not take longer than a few seconds!
 
 - On Microsoft Windows READ can be run as a standalone executable or via python.
 - Other operating systems are limited to python, please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md).
+- Quick start with [uvx](https://docs.astral.sh/uv/reference/cli/#uv-tool-run):
+  ```bash
+  uvx --python 3.13 --from imp-read tmt_chimerys --help
+  ```
+  - Use `tmt_chimerys` for [Chimerys](https://www.msaid.de/chimerys) DIA result files.
+  - Use `tmt_chimerys_dda` for [Chimerys](https://www.msaid.de/chimerys) DDA result files.
+  - Use `tmt_spectronaut` for [Spectronaut](https://biognosys.com/software/spectronaut/) result files.
+  - Use `tmt_diann` for [DIA-NN](https://github.com/vdemichev/DiaNN) result files.
 - Runtime per RAW file is usually between 15-30 minutes.
 
 ### Graphical User Interface
