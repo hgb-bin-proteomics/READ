@@ -1,6 +1,6 @@
 # Command Line Interface
 
-You can run the READ from the command line using [python](https://www.python.org/downloads/)
+You can run READ from the command line using [python](https://www.python.org/downloads/)
 or [uv](https://docs.astral.sh/uv/).
 
 You can find all scripts in the `/scripts` folder.
