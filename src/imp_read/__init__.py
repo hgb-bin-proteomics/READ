@@ -16,5 +16,5 @@ __all__ = [
     "tmt_diann",
     "tmt_spectronaut",
 ]
-__version__ = "2026.8.24"
+__version__ = "2026.9.9"
 __author__ = "Micha Johannes Birklbauer"
