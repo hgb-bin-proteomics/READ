@@ -137,6 +137,8 @@ Annotated Resolution GUI Tool columns:
 Quantification:
 - `Annotated protein-level {reporter}`:
   - Protein-level aggregated reporter quantification after filtering.
+- `Annotated protein-level {reporter} (unfiltered)`:
+  - Protein-level aggregated reporter quantification without filtering.
 
 Reporter statistics per protein:
 - `Annotated mean {reporter} S (unfiltered)`:
@@ -209,6 +211,8 @@ Quantification:
   - Precursor-level reporter quantification (noise subtracted if specified).
 - `Annotated protein-level {reporter}`:
   - Protein-level aggregated reporter quantification after filtering.
+- `Annotated protein-level {reporter} (unfiltered)`:
+  - Protein-level aggregated reporter quantification without filtering.
 
 Precursor statistics:
 - `Co-Isolation Purity`:
@@ -320,6 +324,8 @@ PSM statistics:
 Quantification:
 - `Annotated protein-level {reporter}`:
   - Protein-level aggregated reporter quantification after filtering.
+- `Annotated protein-level {reporter} (unfiltered)`:
+  - Protein-level aggregated reporter quantification without filtering.
 
 PSM/Precursor statistics per protein:
 - `Annotated mean purity`:
@@ -374,6 +380,8 @@ Quantification:
   - PSM-level reporter quantification.
 - `Annotated protein-level {reporter}`:
   - Protein-level aggregated reporter quantification after filtering.
+- `Annotated protein-level {reporter} (unfiltered)`:
+  - Protein-level aggregated reporter quantification without filtering.
 
 Precursor statistics:
 - `Co-Isolation Purity`:
