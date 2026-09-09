@@ -42,8 +42,8 @@ from .tmt_chimerys import __get_sn_for_condition
 
 SPECTRONAUT_SEP = ";"
 
-__version = "2.1.1"
-__date = "2026-08-20"
+__version = "2.2.0"
+__date = "2026-09-09"
 
 
 def __remove_ambiguous_pg(protein_table: pd.DataFrame) -> pd.DataFrame:
@@ -90,6 +90,7 @@ def __annotate_spectronaut_pgs(
         else:
             psms_by_proteins[pg] = [psm]
     channels = {key: [] for key in TMT.keys()}
+    channels_unfiltered = {key: [] for key in TMT.keys()}
     mean_purities: List[float] = list()
     median_purites: List[float] = list()
     nr_psms_filtered: List[int] = list()
@@ -130,6 +131,7 @@ def __annotate_spectronaut_pgs(
         if pg in psms_by_proteins:
             psms_for_pg = psms_by_proteins[pg]
         tmt_quants = {key: 0.0 for key in TMT.keys()}
+        tmt_quants_unfiltered = {key: 0.0 for key in TMT.keys()}
         purities: List[float] = list()
         protein_nr_psms_filtered = 0
         protein_nr_psms_total = 0
@@ -140,6 +142,9 @@ def __annotate_spectronaut_pgs(
         tmt_res = {key: [float("nan")] for key in TMT.keys()}
         tmt_res_f = {key: [float("nan")] for key in TMT.keys()}
         for psm in psms_for_pg:
+            # unfiltered quantification
+            for c in TMT.keys():
+                tmt_quants_unfiltered[c] += psm[f"Annotated {c}"]
             purity = float(psm["Co-Isolation Purity"])
             if pd.isna(purity):
                 protein_nr_psms_filtered += 1
@@ -190,6 +195,8 @@ def __annotate_spectronaut_pgs(
             protein_nr_psms_total += 1
         for k, v in tmt_quants.items():
             channels[k].append(v)
+        for k, v in tmt_quants_unfiltered.items():
+            channels_unfiltered[k].append(v)
         mean_purities.append(float(np.mean(purities)))
         median_purites.append(float(np.median(purities)))
         nr_psms_filtered.append(protein_nr_psms_total - protein_nr_psms_filtered)
@@ -227,6 +234,7 @@ def __annotate_spectronaut_pgs(
     for key in channels.keys():
         precursor_table[f"Annotated protein-level {key}"] = channels[key]
         # fmt: off
+        precursor_table[f"Annotated protein-level {key} (unfiltered)"] = channels_unfiltered[key]
         precursor_table[f"Annotated mean {key} S (unfiltered)"] = _mean_reporter_s[key]
         precursor_table[f"Annotated mean {key} S (filtered)"] = _mean_reporter_s_f[key]
         precursor_table[f"Annotated median {key} S (unfiltered)"] = _median_reporter_s[key]
