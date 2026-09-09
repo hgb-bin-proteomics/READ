@@ -21,9 +21,9 @@ which can be downloaded [here](https://github.com/hgb-bin-proteomics/READ/releas
 
 - Please install [OpenMS](https://openms.readthedocs.io/en/latest/about/installation.html).
   - We recommend and tested using OpenMS version [3.4.0](https://abibuilder.cs.uni-tuebingen.de/archive/openms/OpenMSInstaller/release/3.4.0/)!
-- If you want to run READ via the command line/python, you need to either install
-  [python 3.12 or 3.13](https://www.python.org/downloads/)
-  or install [uv](https://docs.astral.sh/uv/) (_highly recommended_).
+- If you want to run READ via the command line/python, you need to either
+  - install [python 3.12 or 3.13](https://www.python.org/downloads/)
+  - _or_ install [uv](https://docs.astral.sh/uv/) (_highly recommended_).
 - READ was tested with result files from Cimerys `v4.7.0 (Proteome Discoverer 3.2)`, DIA-NN `v2.2.0`, and Spectronaut
   `v20.1.250624.92449` but should also
   work with result files from newer software versions.
@@ -31,9 +31,9 @@ which can be downloaded [here](https://github.com/hgb-bin-proteomics/READ/releas
 
 > [!IMPORTANT]
 >
-> We generally recommend using [uv](https://docs.astral.sh/uv/) for running READ!
-> Please also refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md)
-> for more information on how to use READ with uv.
+> - We generally recommend using [uv](https://docs.astral.sh/uv/) for running READ!
+> - Please also refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md)
+>   for more information on how to use READ with uv.
 
 ## Installation
 
