@@ -14,7 +14,8 @@ You can find all scripts in the `/scripts` folder.
 
 ## Usage with `uvx`
 
-You can use READ with uv **without installing READ** or **running scripts** by using
+You can use READ with [uv](https://docs.astral.sh/uv/)
+**without installing READ** or **running scripts** by using
 [uvx](https://docs.astral.sh/uv/reference/cli/#uv-tool-run).
 
 For example, instead of running the `tmt_chimerys.py` script, you can run:
