@@ -9,6 +9,7 @@ import os
 import tomllib
 import argparse
 import warnings
+import platform
 import subprocess
 import pandas as pd
 import numpy as np
@@ -139,6 +140,11 @@ def __convert(filename: str) -> str:
         print("Not converting file...")
         return filename
     print(f"Found RAW file with name {filename}.")
+    if platform.system() != "Windows":
+        raise RuntimeError(
+            "Detected non-Windows OS - can't convert RAW file! "
+            "Please supply an .mzML file instead!"
+        )
     print("Converting using ThermoRawFileParser...")
     if os.path.isdir("ThermoRawFileParser1.4.5") and os.path.exists(
         os.path.join("ThermoRawFileParser1.4.5", "ThermoRawFileParser.exe")
