@@ -564,6 +564,11 @@ def __get_consensusXML_df(spectrum_filename: str, ini_file: str) -> pd.DataFrame
     consensus_features = oms.ConsensusMap()
     oms.ConsensusXMLFile().load(out_name, consensus_features)
     # see https://pyopenms.readthedocs.io/en/latest/user_guide/export_pandas_dataframe.html#consensusmap
+    # df.columns: 'sequence', 'charge', 'RT', 'mz', 'quality',
+    #             'tmt18plex_132C', 'tmt18plex_135N', 'tmt18plex_134N', 'tmt18plex_127N', 'tmt18plex_129C', 'tmt18plex_130N',
+    #             'tmt18plex_132N', 'tmt18plex_129N', 'tmt18plex_133C', 'tmt18plex_126', 'tmt18plex_128C', 'tmt18plex_131C',
+    #             'tmt18plex_130C', 'tmt18plex_133N', 'tmt18plex_128N', 'tmt18plex_131N', 'tmt18plex_134C', 'tmt18plex_127C',
+    #             'file'
     return consensus_features.get_df()  # pyright: ignore[reportReturnType]
 
 
