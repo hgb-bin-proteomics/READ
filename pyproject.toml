@@ -46,3 +46,10 @@ Homepage = "https://github.com/hgb-bin-proteomics/READ"
 Documentation = "https://github.com/hgb-bin-proteomics/READ"
 Repository = "https://github.com/hgb-bin-proteomics/READ.git"
 Issues = "https://github.com/hgb-bin-proteomics/READ/issues"
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.411",
+    "pytest>=9.1.1",
+    "ruff>=0.16.6",
+]
