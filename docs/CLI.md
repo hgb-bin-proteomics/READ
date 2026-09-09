@@ -12,6 +12,17 @@ You can find all scripts in the `/scripts` folder.
 > desired running location. However, this has the benefit that READ runs in an isolated
 > environment!
 
+## Usage with `uvx`
+
+You can use READ with uv **without installing READ** or **running scripts** by using
+[uvx](https://docs.astral.sh/uv/reference/cli/#uv-tool-run).
+
+For example, instead of running the `tmt_chimerys.py` script, you can run:
+```bash
+uvx --python 3.13 --from imp-read tmt_chimerys <args>
+```
+Where `<args>` are the arguments that should be passed to `tmt_chimerys` (see below).
+
 ## Chimerys DIA
 
 - Export Chimerys PSMs from Proteome Discoverer in tab-separated `.txt` format.
