@@ -1,24 +1,20 @@
 # Command Line Interface
 
-You can run the READ from the command line using [python](https://www.python.org/downloads/)
+You can run READ from the command line using [python](https://www.python.org/downloads/)
 or [uv](https://docs.astral.sh/uv/).
 
-You can find all scripts in the `/scripts` folder.
-
-> [!NOTE]
+> [!IMPORTANT]
 >
-> Installing READ to your global environment will make all scripts globally available,
-> nevertheless we recommend using uv even though it requires copying the scripts to the
-> desired running location. However, this has the benefit that READ runs in an isolated
-> environment!
+> Please note that RAW file input is only supported on Microsoft Windows-based systems!
+> If you use another OS please convert your RAW files to `.mzML` beforehand!
 
 ## Chimerys DIA
 
 - Export Chimerys PSMs from Proteome Discoverer in tab-separated `.txt` format.
 - \[Optionally\] Export Chimerys Proteins from Proteome Discoverer in tab-seperated `.txt` format.
 - Set you desired parameters in `config.toml`.
-- The scripts support both `.raw` files and `.mzML` files as input, `.raw` files will be automatically
-  converted to `.mzML` when the scripts are run.
+- READ supports both `.raw` files and `.mzML` files as input, `.raw` files will be automatically
+  converted to `.mzML` when READ is run.
 - The following steps are optional if you want to convert your `.raw` files manually:
   - Download ThermoRawFileParser from [here](https://github.com/CompOmics/ThermoRawFileParser/releases/tag/v1.4.5).
   - Convert your RAW file with:
@@ -32,17 +28,17 @@ You can find all scripts in the `/scripts` folder.
     ```bash
     pip install uv
     ```
-  - Run the script with:
+  - Run READ with:
     ```bash
-    uv run tmt_chimerys.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini
+    uvx --python 3.13 --from imp-read tmt_chimerys -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini
     ```
   - _or_ if you also have proteins with:
     ```bash
-    uv run tmt_chimerys.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini -p PROTEOME_DISCOVERER_Proteins.txt
+    uvx --python 3.13 --from imp-read tmt_chimerys -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini -p PROTEOME_DISCOVERER_Proteins.txt
     ```
   - To display all possible parameters run:
     ```bash
-    uv run tmt_chimerys.py --help
+    uvx --python 3.13 --from imp-read tmt_chimerys --help
     ```
 - **Option B: Running via native python.**
   - Install python 3.12 or 3.13 from [here](https://www.python.org/downloads/).
@@ -72,8 +68,8 @@ You can find all scripts in the `/scripts` folder.
 - Export Chimerys PSMs from Proteome Discoverer in tab-separated `.txt` format.
 - \[Optionally\] Export Chimerys Proteins from Proteome Discoverer in tab-seperated `.txt` format.
 - Set you desired parameters in `config.toml`.
-- The scripts support both `.raw` files and `.mzML` files as input, `.raw` files will be automatically
-  converted to `.mzML` when the scripts are run.
+- READ supports both `.raw` files and `.mzML` files as input, `.raw` files will be automatically
+  converted to `.mzML` when READ is run.
 - The following steps are optional if you want to convert your `.raw` files manually:
   - Download ThermoRawFileParser from [here](https://github.com/CompOmics/ThermoRawFileParser/releases/tag/v1.4.5)
   - Convert your RAW file with:
@@ -87,17 +83,17 @@ You can find all scripts in the `/scripts` folder.
     ```bash
     pip install uv
     ```
-  - Run the script with:
+  - Run READ with:
     ```bash
-    uv run tmt_chimerys_dda.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini
+    uvx --python 3.13 --from imp-read tmt_chimerys_dda -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini
     ```
   - _or_ if you also have proteins with:
     ```bash
-    uv run tmt_chimerys_dda.py -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini -p PROTEOME_DISCOVERER_Proteins.txt
+    uvx --python 3.13 --from imp-read tmt_chimerys_dda -s SPECTRA.mzML -i PROTEOME_DISCOVERER_PSMs.txt -c config.toml -t tmt18plex_default.ini -p PROTEOME_DISCOVERER_Proteins.txt
     ```
   - To display all possible parameters run:
     ```bash
-    uv run tmt_chimerys_dda.py --help
+    uvx --python 3.13 --from imp-read tmt_chimerys_dda --help
     ```
 - **Option B: Running via native python.**
   - Install python 3.12 or 3.13 from [here](https://www.python.org/downloads/).
@@ -125,10 +121,10 @@ You can find all scripts in the `/scripts` folder.
 ## Spectronaut
 
 - Export matched precursors/the main report from Spectronaut in **semicolon-separated** `.csv` format.
-  - If your result file is comma-separated you need to pass `-d ","` to the script.
+  - If your result file is comma-separated you need to pass `-d ","` to READ.
 - Set you desired parameters in `config.toml`.
-- The scripts support both `.raw` files and `.mzML` files as input, `.raw` files will be automatically
-  converted to `.mzML` when the scripts are run.
+- READ supports both `.raw` files and `.mzML` files as input, `.raw` files will be automatically
+  converted to `.mzML` when READ is run.
 - The following steps are optional if you want to convert your `.raw` files manually:
   - Download ThermoRawFileParser from [here](https://github.com/CompOmics/ThermoRawFileParser/releases/tag/v1.4.5)
   - Convert your RAW file with:
@@ -142,13 +138,13 @@ You can find all scripts in the `/scripts` folder.
     ```bash
     pip install uv
     ```
-  - Run the script with:
+  - Run READ with:
     ```bash
-    uv run tmt_spectronaut.py -s SPECTRA.mzML -i report.csv -c config.toml -t tmt18plex_default.ini
+    uvx --python 3.13 --from imp-read tmt_spectronaut -s SPECTRA.mzML -i report.csv -c config.toml -t tmt18plex_default.ini
     ```
   - To display all possible parameters run:
     ```bash
-    uv run tmt_spectronaut.py --help
+    uvx --python 3.13 --from imp-read tmt_spectronaut --help
     ```
 - **Option B: Running via native python.**
   - Install python 3.12 or 3.13 from [here](https://www.python.org/downloads/).
@@ -173,8 +169,8 @@ You can find all scripts in the `/scripts` folder.
 
 - Use the `report.parquet` that you get from DIA-NN.
 - Set you desired parameters in `config.toml`.
-- The scripts support both `.raw` files and `.mzML` files as input, `.raw` files will be automatically
-  converted to `.mzML` when the scripts are run.
+- READ supports both `.raw` files and `.mzML` files as input, `.raw` files will be automatically
+  converted to `.mzML` when READ is run.
 - The following steps are optional if you want to convert your `.raw` files manually:
   - Download ThermoRawFileParser from [here](https://github.com/CompOmics/ThermoRawFileParser/releases/tag/v1.4.5)
   - Convert your RAW file with:
@@ -188,13 +184,13 @@ You can find all scripts in the `/scripts` folder.
     ```bash
     pip install uv
     ```
-  - Run the script with:
+  - Run READ with:
     ```bash
-    uv run tmt_diann.py -s SPECTRA.mzML -i report.parquet -c config.toml -t tmt18plex_default.ini
+    uvx --python 3.13 --from imp-read tmt_diann -s SPECTRA.mzML -i report.parquet -c config.toml -t tmt18plex_default.ini
     ```
   - To display all possible parameters run:
     ```bash
-    uv run tmt_diann.py --help
+    uvx --python 3.13 --from imp-read tmt_diann --help
     ```
 - **Option B: Running via native python.**
   - Install python 3.12 or 3.13 from [here](https://www.python.org/downloads/).
@@ -214,3 +210,7 @@ You can find all scripts in the `/scripts` folder.
   containing purity and quantification values.
 - Please refer to [OUTPUT.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/OUTPUT.md) for a description of the new
   columns in the output file(s).
+
+> [!NOTE]
+>
+> If you are using uv/uvx you can clear the uv cache after running READ with `uv cache clear`!

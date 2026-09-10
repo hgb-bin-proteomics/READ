@@ -21,15 +21,21 @@ which can be downloaded [here](https://github.com/hgb-bin-proteomics/READ/releas
 
 - Please install [OpenMS](https://openms.readthedocs.io/en/latest/about/installation.html).
   - We recommend and tested using OpenMS version [3.4.0](https://abibuilder.cs.uni-tuebingen.de/archive/openms/OpenMSInstaller/release/3.4.0/)!
-- If you want to run READ via the command line/python, you need to install [python 3.12 or 3.13](https://www.python.org/downloads/)
-  or [uv](https://docs.astral.sh/uv/) (recommended).
-- READ was tested with result files from Cimerys v4.7.0 (Proteome Discoverer 3.2), DIA-NN v2.2.0, and Spectronaut v20.1.250624.92449 but should also
+- If you want to run READ via the command line/python, you need to either
+  - install [python 3.12 or 3.13](https://www.python.org/downloads/)
+  - _or_ install [uv](https://docs.astral.sh/uv/) (_highly recommended_).
+- READ was tested with result files from Cimerys `v4.7.0 (Proteome Discoverer 3.2)`, DIA-NN `v2.2.0`, and Spectronaut
+  `v20.1.250624.92449` but should also
   work with result files from newer software versions.
+- READ supports Thermo RAW files as input on Microsoft Windows-based systems, on other operating systems
+  please convert your RAW files to `.mzML` format first!
 - We recommend at least 16GB of memory for running READ!
 
 > [!IMPORTANT]
 >
-> We generally recommend using [uv](https://docs.astral.sh/uv/) for running READ!
+> - We generally recommend using [uv](https://docs.astral.sh/uv/) for running READ!
+> - Please also refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md)
+>   for more information on how to use READ with uv.
 
 ## Installation
 
@@ -51,6 +57,14 @@ Installation should not take longer than a few seconds!
 
 - On Microsoft Windows READ can be run as a standalone executable or via python.
 - Other operating systems are limited to python, please refer to [CLI.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CLI.md).
+- Quick start with [uvx](https://docs.astral.sh/uv/reference/cli/#uv-tool-run):
+  ```bash
+  uvx --python 3.13 --from imp-read tmt_chimerys --help
+  ```
+  - Use `tmt_chimerys` for [Chimerys](https://www.msaid.de/chimerys) DIA result files.
+  - Use `tmt_chimerys_dda` for [Chimerys](https://www.msaid.de/chimerys) DDA result files.
+  - Use `tmt_spectronaut` for [Spectronaut](https://biognosys.com/software/spectronaut/) result files.
+  - Use `tmt_diann` for [DIA-NN](https://github.com/vdemichev/DiaNN) result files.
 - Runtime per RAW file is usually between 15-30 minutes.
 
 ### Graphical User Interface

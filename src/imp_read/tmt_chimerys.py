@@ -9,6 +9,7 @@ import os
 import tomllib
 import argparse
 import warnings
+import platform
 import subprocess
 import pandas as pd
 import numpy as np
@@ -25,7 +26,7 @@ from typing import Tuple
 from typing import Any
 
 
-__version = "2.3.0"
+__version = "2.3.1"
 __date = "2026-09-09"
 
 TMT_TOLERANCE = 0.0025
@@ -139,6 +140,11 @@ def __convert(filename: str) -> str:
         print("Not converting file...")
         return filename
     print(f"Found RAW file with name {filename}.")
+    if platform.system() != "Windows":
+        raise RuntimeError(
+            "Detected non-Windows OS - can't convert RAW file! "
+            "Please supply an .mzML file instead!"
+        )
     print("Converting using ThermoRawFileParser...")
     if os.path.isdir("ThermoRawFileParser1.4.5") and os.path.exists(
         os.path.join("ThermoRawFileParser1.4.5", "ThermoRawFileParser.exe")
@@ -558,6 +564,11 @@ def __get_consensusXML_df(spectrum_filename: str, ini_file: str) -> pd.DataFrame
     consensus_features = oms.ConsensusMap()
     oms.ConsensusXMLFile().load(out_name, consensus_features)
     # see https://pyopenms.readthedocs.io/en/latest/user_guide/export_pandas_dataframe.html#consensusmap
+    # df.columns: 'sequence', 'charge', 'RT', 'mz', 'quality',
+    #             'tmt18plex_132C', 'tmt18plex_135N', 'tmt18plex_134N', 'tmt18plex_127N', 'tmt18plex_129C', 'tmt18plex_130N',
+    #             'tmt18plex_132N', 'tmt18plex_129N', 'tmt18plex_133C', 'tmt18plex_126', 'tmt18plex_128C', 'tmt18plex_131C',
+    #             'tmt18plex_130C', 'tmt18plex_133N', 'tmt18plex_128N', 'tmt18plex_131N', 'tmt18plex_134C', 'tmt18plex_127C',
+    #             'file'
     return consensus_features.get_df()  # pyright: ignore[reportReturnType]
 
 
