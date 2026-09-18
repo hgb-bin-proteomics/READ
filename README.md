@@ -211,11 +211,7 @@ We thank _Dasha Pototska_ for designing the READ logo!
 
 - The software and code in this repository are [MIT](https://github.com/hgb-bin-proteomics/READ/blob/master/LICENSE) licensed.
 - The [READ logo](https://github.com/hgb-bin-proteomics/READ/tree/master/docs/logo) © 2026 by Dasha Pototska and Micha Birklbauer is licensed under
-  [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
-  <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
-  <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
-  <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
-  <img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+  [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 
 ## Citing
 
