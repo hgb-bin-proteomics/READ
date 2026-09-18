@@ -102,6 +102,8 @@ using [PowerShell](https://learn.microsoft.com/en-us/powershell/module/microsoft
 An example READ config file is given in the `config/` directory.
 Please set the following parameters according to your needs in the `config.toml` file:
 
+<details><summary>Expand to show example config file!</summary>
+
 ```toml
 [METHOD]
 # window size
@@ -182,6 +184,8 @@ sn_thresholds = { all = 0.0, cond1 = 10.0, cond2 = 10.0 }
 # please not that the conditions have to be the same in sn_thresholds and s_thresholds
 s_thresholds = { all = 0.0, cond1 = 0.0, cond2 = 0.0 }
 ```
+
+</details>
 
 > [!IMPORTANT]
 >
