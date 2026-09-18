@@ -232,7 +232,7 @@ PSM/Precursor statistics per protein:
 
 *****
 
-### READ for DIA-NN & READ for Spectronaut
+### READ for Spectronaut & READ for DIA-NN
 
 #### Main Report
 
@@ -401,7 +401,7 @@ Annotated max {reporter} resolution (filtered)
 
 *****
 
-### READ for DIA-NN & READ for Spectronaut
+### READ for Spectronaut & READ for DIA-NN
 
 #### Main Report
 
