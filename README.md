@@ -203,9 +203,28 @@ You might also want to use the output of the Resolution GUI tool developed by Di
 
 - [1] Keele, G.R., Dou, Y., Kodikara, S.P. et al. Expanding the landscape of aging via orbitrap astral mass spectrometry and tandem mass tag integration. Nat Commun 16, 4753 (2025). [https://doi.org/10.1038/s41467-025-60022-x](https://doi.org/10.1038/s41467-025-60022-x)
 
-## Use of Generative-AI/LLMs
+## Acknowledgements
 
-The READ logo was generated with [Lumo AI](https://proton.me/lumo). No Gen-AI/LLMs were used for anything else otherwise.
+We thank _Dasha Pototska_ for designing the READ logo!
+
+## License
+
+- The software and code in this repository are [MIT](https://github.com/hgb-bin-proteomics/READ/blob/master/LICENSE) licensed.
+- The [READ logo](https://github.com/hgb-bin-proteomics/READ/tree/master/docs/logo) © 2026 by Dasha Pototska and Micha Birklbauer is licensed under
+  [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+  <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+  <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+  <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+  <img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+
+## Citing
+
+If you are using READ please cite the following publication:
+
+- Manuscript in preparation
+  ```
+  (wip)
+  ```
 
 ## Contact
 
