@@ -7,7 +7,7 @@ hero:
   text: Quantification for Single Cell Proteomics
   tagline: Simplified computational orchestration for the quantification of TMT- and mass spectrometry-based single cell proteomics data!
   image:
-    src: https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo/variations/square_rounded_corners_4096.png
+    src: https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo/variations/square_rounded_corners_1024.png
     alt: logo
   actions:
     - theme: brand
