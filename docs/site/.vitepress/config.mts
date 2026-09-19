@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: "/read/",
+  base: "/READ/",
   srcDir: "md",
   title: "READ",
   description: "TMTpro-18plex quantification for [single cell] DIA and DDA searches with Chimerys, Spectronaut, and DIA-NN.",
