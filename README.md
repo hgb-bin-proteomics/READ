@@ -1,7 +1,7 @@
 # READ
 _\[R\]eporter Ion \[E\]xtractor and \[A\]nnotation \[D\]irector_
 
-<img src="https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo/logo_padded.png" class="dark-light" align="left" width="200px" style="padding: 5px 20px 10px 20px;"/>
+<img src="https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo/logo_padded.png" class="dark-light" align="left" width="200px" style="padding: 5px 5px 5px 5px;"/>
 
 **READ** is a python-based tool to orchestrate
 TMTpro-18plex quantification for \[single cell\] DIA and DDA searches with
