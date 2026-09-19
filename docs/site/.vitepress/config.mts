@@ -30,20 +30,24 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "About", link: "/about" },
-      { text: "Documentation", link: "/docs_intro" },
+      { text: "Documentation", link: "/docs/docs_intro" },
       { text: "Contact", link: "/contact" },
     ],
     sidebar: [
       {
         items: [
           { text: "About", link: "/about" },
-          { text: "Introduction", link: "/docs_intro" },
-          { text: "Installation", link: "/docs_install" },
-          { text: "Example", link: "/docs_example" },
-          { text: "Usage", link: "/docs_usage" },
-          { text: "Configuration", link: "/docs_config" },
-          { text: "Output", link: "/docs_output" },
-          { text: "Batch Processing", link: "/docs_batch" },
+          { text: "Documentation", items:
+            [
+              { text: "Introduction", link: "/docs/docs_intro" },
+              { text: "Installation", link: "/docs/docs_install" },
+              { text: "Example", link: "/docs/docs_example" },
+              { text: "Usage", link: "/docs/docs_usage" },
+              { text: "Configuration", link: "/docs/docs_config" },
+              { text: "Output", link: "/docs/docs_output" },
+              { text: "Batch Processing", link: "/docs/docs_batch" },
+            ]
+          },
           { text: "Help", link: "/contact" },
         ],
       },
