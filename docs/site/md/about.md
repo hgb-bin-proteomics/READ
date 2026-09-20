@@ -1,7 +1,7 @@
 # READ
 _\[R\]eporter Ion \[E\]xtractor and \[A\]nnotation \[D\]irector_
 
-<img src="https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo/logo_padded.png" align="left" width="200px"/>
+<img src="https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo/logo_padded.png" align="left" width="200px" style="padding-right: 20px;"/>
 
 <div style="text-align: justify">
 
