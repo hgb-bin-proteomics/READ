@@ -62,7 +62,7 @@ export default defineConfig({
         provider: 'local'
     },
     editLink: {
-      pattern: 'https://github.com/hgb-bin-proteomics/READ/edit/master/docs/site/:path'
+      pattern: 'https://github.com/hgb-bin-proteomics/READ/edit/master/docs/site/md/:path'
     },
   },
 })
