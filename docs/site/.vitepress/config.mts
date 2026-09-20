@@ -21,6 +21,7 @@ export default defineConfig({
      dark: "catppuccin-mocha",
     },
   },
+  lastUpdated: true,
   themeConfig: {
     logo: {
       src: "https://github.com/hgb-bin-proteomics/READ/raw/master/docs/logo/logo.png",
@@ -59,6 +60,9 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com/hgb-bin-proteomics/READ" }],
     search: {
         provider: 'local'
+    },
+    editLink: {
+      pattern: 'https://github.com/hgb-bin-proteomics/READ/edit/master/docs/site/:path'
     },
   },
 })
