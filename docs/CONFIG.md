@@ -133,6 +133,7 @@ The following parameters can be adjusted in the `[FILTERING]` section:
 - `total_intensity_threshold`:
   - Parameter only used for logging some preliminary statistics, READ will display how many
     precursors pass this co-isolation purity value (`float`).
+  - The actual filtering based on co-isolation purity is controlled via `PROTEIN.min_purity`!
 - `noise_threshold`:
   - The minimum relative intensity threshold compared to the most intense peak in the isolation window
     to not be considered noise, e.g. `0.1` denotes that any peak below 10% intensity of the most intense
@@ -175,7 +176,7 @@ The following parameters can be adjusted in the `[PROTEIN]` section:
 
 ## Condition Parameters
 
-The `[CONDITIONS]` allows setup of different conditions based on the reporter ions.
+The `[CONDITIONS]` section allows setup of different conditions based on the reporter ions.
 Each condition should be given as the condition name (without spaces) followed by an equal sign
 and then a list of TMT reporter ions, for example:
 
@@ -201,7 +202,7 @@ The following parameters can then be adjusted in the `[CONDITIONS]` section:
 > Please also check the example config file for a better demonstration on how to set
 > up different conditions!
 
-## TMT Correction Factors
+## TMT Isotope Correction Factors
 
 > [!IMPORTANT]
 >
