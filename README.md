@@ -187,6 +187,8 @@ s_thresholds = { all = 0.0, cond1 = 0.0, cond2 = 0.0 }
 
 </details>
 
+Please also refer to [CONFIG.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/CONFIG.md).
+
 > [!IMPORTANT]
 >
 > You might also want to adapt the isotope correction factors for your TMT lot, you can do that in the `tmt18plex_default.ini` file.

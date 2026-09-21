@@ -1,14 +1,8 @@
 # Configuration
 
-<div style="text-align: justify">
-
-READ requires a configuration file in `.toml` format[^1] as input. An example READ
-config file is given in the `config/` directory ➡️ see [here](https://github.com/hgb-bin-proteomics/READ/tree/master/config).
+READ requires a configuration file in `.toml` format as input. An example READ
+config file is given in the `config/` directory.
 Please set the following parameters according to your needs in the `config.toml` file:
-
-</div>
-
-[^1]: [https://toml.io/](https://toml.io/)
 
 ```toml
 [METHOD]
@@ -91,13 +85,10 @@ sn_thresholds = { all = 0.0, cond1 = 10.0, cond2 = 10.0 }
 s_thresholds = { all = 0.0, cond1 = 0.0, cond2 = 0.0 }
 ```
 
-<div style="text-align: justify">
-
 > [!IMPORTANT]
+>
 > You might also want to adapt the isotope correction factors for your TMT lot, you can do that in the `tmt18plex_default.ini` file.
 > Please refer to the documentation site of OpenMS [here](https://openms.de/documentation/html/TOPP_IsobaricAnalyzer.html).
-
-</div>
 
 ## Method Parameters
 
@@ -111,13 +102,10 @@ The following parameters can be adjusted in the `[METHOD]` section:
 - `window_overlap`:
   - Size of the isolation window overlap in m/z (`float`).
 
-<div style="text-align: justify">
-
 > [!IMPORTANT]
+>
 > Please note that if a window file is provided to READ via `-w` or `--window` it will
 > automatically override these parameters!
-
-</div>
 
 ## Matching Parameters
 
@@ -129,13 +117,10 @@ The following parameters can be adjusted in the `[MATCHING]` section:
 - `ms1_rt_window`
   - The retention time window that a MS1 and corresponding MS2 spectrum must be in, in seconds (`float`).
 
-<div style="text-align: justify">
-
 > [!IMPORTANT]
+>
 > These parameters majorly control how identifications are matched to (precursor) peaks and MS spectra,
 > usually the values in the default config file are a good selection!
-
-</div>
 
 ## Isotope Parameters
 
@@ -196,13 +181,9 @@ The following parameters can be adjusted in the `[PROTEIN]` section:
 
 ## Condition Parameters
 
-<div style="text-align: justify">
-
 The `[CONDITIONS]` section allows setup of different conditions based on the reporter ions.
 Each condition should be given as the condition name (without spaces) followed by an equal sign
 and then a list of TMT reporter ions, for example:
-
-</div>
 
 ```toml
 all = ["TMTpro-126",  "TMTpro-127N", "TMTpro-127C", "TMTpro-128N", "TMTpro-128C",
@@ -211,24 +192,17 @@ all = ["TMTpro-126",  "TMTpro-127N", "TMTpro-127C", "TMTpro-128N", "TMTpro-128C"
        "TMTpro-134N", "TMTpro-134C", "TMTpro-135N"]
 ```
 
-<div style="text-align: justify">
-
 This would define one condition called `all` which contains all reporter ions.
-
-</div>
 
 The following parameters can then be adjusted in the `[CONDITIONS]` section:
 - `sn_thresholds`:
   - The minimum S/N thresholds per condition that should be applied for protein aggregation.
-  - For example: `sn_thresholds = { all = 0.0 }`<br>(no minimum S/N filter for condition `all`).
+  - For example: `sn_thresholds = { all = 0.0 }` (no minimum S/N filter for condition `all`).
 - `s_thresholds`:
   - The minimum abundance thresholds per condition that should be applied for protein aggregation.
-  - For example: `s_thresholds = { all = 0.0 }`<br>(no minimum abundance filter for condition `all`).
-
-<div style="text-align: justify">
+  - For example: `s_thresholds = { all = 0.0 }` (no minimum abundance filter for condition `all`).
 
 > [!TIP]
+>
 > Please also check the example config file for a better demonstration on how to set
 > up different conditions!
-
-</div>
