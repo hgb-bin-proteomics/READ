@@ -85,6 +85,11 @@ sn_thresholds = { all = 0.0, cond1 = 10.0, cond2 = 10.0 }
 s_thresholds = { all = 0.0, cond1 = 0.0, cond2 = 0.0 }
 ```
 
+> [!IMPORTANT]
+>
+> You might also want to adapt the isotope correction factors for your TMT lot, you can do that in the `tmt18plex_default.ini` file.
+> Please refer to the documentation site of OpenMS [here](https://openms.de/documentation/html/TOPP_IsobaricAnalyzer.html).
+
 ## Method Parameters
 
 The following parameters can be adjusted in the `[METHOD]` section:
@@ -201,10 +206,3 @@ The following parameters can then be adjusted in the `[CONDITIONS]` section:
 >
 > Please also check the example config file for a better demonstration on how to set
 > up different conditions!
-
-## TMT Isotope Correction Factors
-
-> [!IMPORTANT]
->
-> You might also want to adapt the isotope correction factors for your TMT lot, you can do that in the `tmt18plex_default.ini` file.
-> Please refer to the documentation site of OpenMS [here](https://openms.de/documentation/html/TOPP_IsobaricAnalyzer.html).
