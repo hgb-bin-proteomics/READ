@@ -45,6 +45,10 @@ uv add imp-read
 
 Installation should not take longer than a few seconds!
 
+<div style="text-align: justify">
+
 > [!TIP]
 > The recommended way of using READ is via [uvx](https://docs.astral.sh/uv/reference/cli/#uv-tool-run)
 > which does not require installation of READ!<br>Please see [Usage](/docs/docs_usage)!
+
+</div>
