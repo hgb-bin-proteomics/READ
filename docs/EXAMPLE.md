@@ -1,6 +1,6 @@
 # Example Data and Usage
 
-Please download the example data from here: [pcloud](https://u.pcloud.link/publink/show?code=kZwSebJZHvmADbINd5yxry3WhPk5qQmg23mV).
+Please download the example data from here: [pCloud](https://u.pcloud.link/publink/show?code=kZwSebJZHvmADbINd5yxry3WhPk5qQmg23mV).
 
 Then extract the `example.zip` file and you should get the following contents:
 - `20250920_Neo6A1_TH073_TT_THIDmulti005_DIA_mz1_ij8_53c75ng_1.raw`
