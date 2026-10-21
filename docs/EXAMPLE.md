@@ -85,4 +85,4 @@ Then extract the `example.zip` file and you should get the following contents:
 
 ![Example Screenshot Step 9](https://github.com/hgb-bin-proteomics/READ/raw/master/docs/img/example/example_9.png)
 
-This document is currently still a WIP!
+- You will get a new `report_purity_tmt_quant.parquet` file annotated by READ. Please refer to [OUTPUT.md](https://github.com/hgb-bin-proteomics/READ/blob/master/docs/OUTPUT.md) for details.
