@@ -48,8 +48,8 @@ Then extract the `example.zip` file and you should get the following contents:
 ![Example Screenshot Step 2](https://github.com/hgb-bin-proteomics/READ/raw/master/docs/img/example/example_2.png)
 
 - Then click the "Start" button.
-- You will presented with "Running" window and a terminal should pop up.
-- The terminal will run [ThermoRawFileParser](https://github.com/compomics/ThermoRawFileParser) and convert the RAW file to mzML format.
+- You will presented with the "Running" window and a terminal should pop up.
+- The terminal will run [ThermoRawFileParser](https://github.com/compomics/ThermoRawFileParser) and convert the RAW file to `.mzML` format.
 
 ![Example Screenshot Step 3](https://github.com/hgb-bin-proteomics/READ/raw/master/docs/img/example/example_3.png)
 
@@ -71,7 +71,7 @@ Then extract the `example.zip` file and you should get the following contents:
 ![Example Screenshot Step 6](https://github.com/hgb-bin-proteomics/READ/raw/master/docs/img/example/example_6.png)
 
 - After that the protein annotation is performed.
-- The application might seem unresponsive as nothing is printed to the "Running" window, however this is normal and the application is running in the background.
+- The application might seem unresponsive as nothing is printed to the "Running" window, however **this is normal and the application is running in the background**.
 - The progress is sometimes not accurately reported in the GUI, please do not stop the application if you do not see progress - if there was an error it would pop up!
 - The protein annotation might take a few minutes.
 
