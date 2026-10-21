@@ -16,8 +16,8 @@ Then extract the `example.zip` file and you should get the following contents:
 
 > [!IMPORTANT]
 >
-> This example assumes you are running the example on a Windows PC. If you are not
-> running Windows you need to convert the RAW file to .mzml and can only use the CLI!
+> This example assumes you are running the example on a Microsoft Windows PC. If you are not
+> running Microsoft Windows you need to convert the RAW file to `.mzml` format and can only use the CLI!
 
 > [!TIP]
 >
