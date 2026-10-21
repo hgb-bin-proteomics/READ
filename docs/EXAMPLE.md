@@ -6,7 +6,7 @@ Then extract the `example.zip` file and you should get the following contents:
 - `20250920_Neo6A1_TH073_TT_THIDmulti005_DIA_mz1_ij8_53c75ng_1.raw`
   - MS data, RAW file, DIA, 1 m/z isolation window.
 - `config.toml`
- - The configuration for READ.
+  - The configuration for READ.
 - `report.parquet`
   - DIA-NN report.
 - `resolution.csv`
