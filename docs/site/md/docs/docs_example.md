@@ -26,8 +26,8 @@ Then extract the `example.zip` file and you should get the following contents:
 
 - Please install [OpenMS](https://openms.readthedocs.io/en/latest/about/installation.html).
   - We recommend and tested using OpenMS version [3.4.0](https://abibuilder.cs.uni-tuebingen.de/archive/openms/OpenMSInstaller/release/3.4.0/)!
-- If you want to run the READ command line interface examples, please install [uv](https://docs.astral.sh/uv/).
-- If you want to run the READ graphical user interface examples, please download the executables from [here](https://github.com/hgb-bin-proteomics/READ/releases/latest).
+- If you want to run the READ command line interface example, please install [uv](https://docs.astral.sh/uv/).
+- If you want to run the READ graphical user interface example, please download the `READ_Chimerys_DIA.exe` executable from [here](https://github.com/hgb-bin-proteomics/READ/releases/latest).
 
 ## Example Usage of the GUI
 
