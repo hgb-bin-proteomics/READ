@@ -17,6 +17,10 @@ minimum reporter signal, and minimum reporter signal-to-noise. Filtering behavio
 **READ** can easily be installed via [PyPI](https://pypi.org/p/IMP-READ/) and run via the command line. We also provide executables with a graphical user interface for Microsoft Windows
 which can be downloaded [here](https://github.com/hgb-bin-proteomics/READ/releases). In-depth information on how to install and run **READ** can be found below.
 
+> [!TIP]
+>
+> Documentation in a more structured format is available via [hgb-bin-proteomics.github.io/READ](https://hgb-bin-proteomics.github.io/READ/)!
+
 ## Requirements
 
 - Please install [OpenMS](https://openms.readthedocs.io/en/latest/about/installation.html).
